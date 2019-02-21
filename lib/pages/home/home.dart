@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
+import "package:mood_app/pages/home/Dashboard.dart";
 
 class HomePage extends StatelessWidget {
-  final Color color;
-
-  HomePage(this.color);
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-      color: color,
+      child: Dashboard(),
     );
   }
 }
