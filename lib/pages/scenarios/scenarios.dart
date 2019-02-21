@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import "package:mood_app/widgets/PageTitle.dart";
+import "package:mood_app/widgets/MoodCard.dart";
+
 class ScenariosPage extends StatelessWidget {
 
   @override
@@ -10,7 +12,7 @@ class ScenariosPage extends StatelessWidget {
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new PageTitle("Scenarios")
+              new PageTitle("scenarios"),
             ],
         ),
     );
