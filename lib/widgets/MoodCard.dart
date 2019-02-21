@@ -3,19 +3,22 @@ import "package:mood_app/ui/theme.dart";
 
 
 // card content model
-class MoodCardContent {
-  final String title;
-  final IconData icon;
-
-  const MoodCardContent(this.title, this.icon);
-}
-
+//class MoodCardContent {
+//  final String title;
+//  final IconData icon;
+//  MoodCardContent(this.title, this.icon);
+//}
+//
 
 class MoodCard extends StatefulWidget {
 
-  final MoodCardContent content;
+  final String title;
+  final IconData icon;
+  MoodCard(this.title, this.icon);
 
-  MoodCard(this.content);
+//
+//  static final MoodCardContent content = MoodCardContent(title, icon);
+//
 
   _MoodCardState createState() => _MoodCardState();
 
@@ -31,12 +34,17 @@ class _MoodCardState extends State<MoodCard>{
 
     return Card(
       elevation: 8.0,
-        margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+      margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
       child: Container(
+
         decoration: BoxDecoration(
           color: MoodThemeData.primaryColor,
+          borderRadius: new BorderRadius.all(new Radius.circular(20.0)),
         ),
-        child: _makeListTile(widget.content),
+        child: _makeListTile(widget),
       ),
     );
 
@@ -44,10 +52,9 @@ class _MoodCardState extends State<MoodCard>{
 
 
 // helper methods
-  Widget _makeListTile(MoodCardContent content) {
+  Widget _makeListTile(widget) {
     return new ListTile(
-      contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-
+      contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
       onTap: (){
         // TODO: Moodcard button navigation
       },
@@ -56,22 +63,24 @@ class _MoodCardState extends State<MoodCard>{
         padding: EdgeInsets.only(right: 12.0),
         margin: EdgeInsets.only(right: 25.0),
         decoration: new BoxDecoration(
+
             border: new Border(
                 right: new BorderSide(width: 1.0, color: Colors.white24))),
-        child: Icon(content.icon, color: Colors.white),
+        child: Icon(widget.icon, color: Colors.white, size: 30.0,),
       ),
-      title: Text(
-        content.title,
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w300,
-        ),
+      title: new Text(
+        widget.title,
+        style: new TextStyle(
+            color: MoodThemeData.buttonColor,
+            fontWeight: FontWeight.w300,
+            fontSize: 25.0),
+        textAlign: TextAlign.left,
       ),
 
       trailing: Icon(
         Icons.keyboard_arrow_right,
         color: Colors.white,
-        size: 30.0,
+        size: 40.0,
       ),
     );
   }
