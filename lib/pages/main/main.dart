@@ -27,10 +27,10 @@ class MainState extends State<Main> {
   }
 
   final List<Widget> _pages= [
-    HomePage(Colors.blueAccent),
-    ScenariosPage(Colors.purpleAccent),
-    ExercisesPage(Colors.redAccent),
-    CalendarPage(Colors.greenAccent),
+    HomePage(),
+    ScenariosPage(),
+    ExercisesPage(),
+    CalendarPage(),
   ];
 
 
@@ -40,7 +40,7 @@ class MainState extends State<Main> {
       bottomNavigationBar: Container(
         height: 55.0,
         child: new BottomAppBar(
-          color: MoodThemeData.accentColor,
+          color: MoodThemeData.canvasColor,
           child: new Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.max,
@@ -77,7 +77,7 @@ class MainState extends State<Main> {
         ),
       ),
       body: _pages[_currentIndex],
-      backgroundColor: MoodThemeData.accentColor,
+      backgroundColor: MoodThemeData.canvasColor,
     );
   }
 

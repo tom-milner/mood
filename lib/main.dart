@@ -13,7 +13,9 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       debugShowCheckedModeBanner: false,
         title: "mood",
-      theme: Theme.MoodThemeData,
+      theme: Theme.MoodThemeData.copyWith(
+
+      ),
       home: Main(),
     );
   }

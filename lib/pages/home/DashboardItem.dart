@@ -5,13 +5,34 @@ class DashboardItem extends StatefulWidget {
   final String text;
   final IconData icon;
 
-  const DashboardItem(this.icon, this.text);
+  const DashboardItem([this.text, this.icon]);
 
   @override
   _DashboardItemState createState() => _DashboardItemState();
 }
 
 class _DashboardItemState extends State<DashboardItem> {
+  Widget getChild(widget) {
+    if (widget.text != null) {
+      return new Container (
+        padding: EdgeInsets.only(top: 10, left: 10),
+        child: new Text(
+        widget.text,
+        style: new TextStyle(
+            color: MoodThemeData.buttonColor,
+            fontWeight: FontWeight.w300,
+            fontSize: 20.0),
+        textAlign: TextAlign.left,
+      ),);
+    } else {
+      return  new IconButton(
+        icon: Icon(widget.icon),
+        disabledColor: MoodThemeData.buttonColor,
+        onPressed: (){},
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -20,24 +41,7 @@ class _DashboardItemState extends State<DashboardItem> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
-      child: new InkWell(
-        onTap: () {},
-        child: new Center(
-          child: new Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: new Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                new Icon(
-                  widget.icon,
-                  color: MoodThemeData.buttonColor,
-                ),
-                new Text(widget.text)
-              ],
-            ),
-          ),
-        ),
-      ),
+      child: getChild(widget),
     );
   }
 }
