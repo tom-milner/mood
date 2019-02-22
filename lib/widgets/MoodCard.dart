@@ -60,13 +60,13 @@ class _MoodCardState extends State<MoodCard>{
       },
 
       leading: Container(
-        padding: EdgeInsets.only(right: 12.0),
-        margin: EdgeInsets.only(right: 25.0),
+        padding: EdgeInsets.only(right: 30.0),
+        margin: EdgeInsets.only(right: 20.0),
         decoration: new BoxDecoration(
 
             border: new Border(
-                right: new BorderSide(width: 1.0, color: Colors.white24))),
-        child: Icon(widget.icon, color: Colors.white, size: 30.0,),
+                right: new BorderSide(width: .5, color: MoodThemeData.buttonColor))),
+        child: Icon(widget.icon, color: MoodThemeData.buttonColor, size: 30.0,),
       ),
       title: new Text(
         widget.title,
