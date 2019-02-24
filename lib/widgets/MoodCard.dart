@@ -79,7 +79,7 @@ class _MoodCardState extends State<MoodCard>{
 
       trailing: Icon(
         Icons.keyboard_arrow_right,
-        color: Colors.white,
+        color: MoodThemeData.buttonColor,
         size: 40.0,
       ),
     );

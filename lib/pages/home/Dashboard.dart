@@ -37,6 +37,7 @@ class _DashboardState extends State<Dashboard> {
     return new DashboardItem(  IconButton(
       icon: Icon(icon),
       disabledColor: MoodThemeData.buttonColor,
+      color: MoodThemeData.buttonColor,
       onPressed: (){
         // TODO button navigation in dashboard
       },

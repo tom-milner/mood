@@ -47,27 +47,27 @@ class MainState extends State<Main> {
             children: <Widget>[
               IconButton(
                 icon: Icon(Icons.home,),
-//              color: Colors.white70,
+              color: MoodThemeData.buttonColor,
                 disabledColor: Colors.white,
                 onPressed: (){changePage(0);},
               ),
               IconButton(
                 icon: Icon(Icons.library_books),
-//              color: Colors.white70,
+                color: MoodThemeData.buttonColor,
                 disabledColor: Colors.white,
                 onPressed: (){changePage(1);},
 
               ),
               IconButton(
                 icon: Icon(Icons.accessibility_new),
-//              color: Colors.white70,
+                color: MoodThemeData.buttonColor,
                 disabledColor: Colors.white,
                 onPressed: (){changePage(2);},
 
               ),
               IconButton(
                 icon: Icon(Icons.calendar_today),
-//              color: Colors.white70,
+                color: MoodThemeData.buttonColor,
                 disabledColor: Colors.white,
                 onPressed: (){changePage(3);},
 
