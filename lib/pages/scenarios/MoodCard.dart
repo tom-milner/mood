@@ -32,7 +32,7 @@ class _MoodCardState extends State<MoodCard>{
   @override
   Widget build(BuildContext context) {
 
-    return Card(
+      Card(
       elevation: 2.0,
       margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
         shape: RoundedRectangleBorder(
