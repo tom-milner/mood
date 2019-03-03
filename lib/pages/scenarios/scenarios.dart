@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import "package:mood_app/widgets/PageTitle.dart";
-import "package:mood_app/widgets/MoodCard.dart";
+import "package:mood_app/pages/scenarios/MoodCard.dart";
 
 class ScenariosPage extends StatelessWidget {
 

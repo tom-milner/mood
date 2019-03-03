@@ -15,7 +15,7 @@ class _DashboardItemState extends State<DashboardItem> {
   Widget build(BuildContext context) {
     return Card(
       color: MoodThemeData.primaryColor,
-      elevation: 20.0,
+      elevation: 2.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),

@@ -33,7 +33,7 @@ class _MoodCardState extends State<MoodCard>{
   Widget build(BuildContext context) {
 
     return Card(
-      elevation: 8.0,
+      elevation: 2.0,
       margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
