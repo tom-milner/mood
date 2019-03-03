@@ -14,7 +14,7 @@ class MoodCard extends StatefulWidget {
 
   final String title;
   final IconData icon;
-  MoodCard(this.title, this.icon);
+  MoodCard(this.title,[ this.icon]);
 
 //
 //  static final MoodCardContent content = MoodCardContent(title, icon);
@@ -34,15 +34,15 @@ class _MoodCardState extends State<MoodCard>{
 
       Card(
       elevation: 2.0,
-      margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+      margin: EdgeInsets.symmetric(horizontal: 5.0, vertical: 6.0),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
+          borderRadius: BorderRadius.circular(5.0),
         ),
       child: Container(
 
         decoration: BoxDecoration(
           color: MoodThemeData.primaryColor,
-          borderRadius: new BorderRadius.all(new Radius.circular(20.0)),
+          borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
         ),
         child: _makeListTile(widget),
       ),
@@ -54,7 +54,7 @@ class _MoodCardState extends State<MoodCard>{
 // helper methods
   Widget _makeListTile(widget) {
     return new ListTile(
-      contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+      contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       onTap: (){
         // TODO: Moodcard button navigation
       },
