@@ -19,7 +19,7 @@ class _PageContentState extends State<PageContent> {
 
   // build individual scenario cards
   Widget _buildScenario(Scenario scenario){
-    return new MoodCard(scenario.title, scenario.icon);
+    return new MoodCard(scenario);
   }
 
   @override

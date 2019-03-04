@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 import "package:mood_app/ui/theme.dart";
+import "package:mood_app/pages/scenarios/ScenarioPage.dart";
+import "package:mood_app/models/Scenario.dart";
 
 
 // card content model
@@ -12,9 +14,8 @@ import "package:mood_app/ui/theme.dart";
 
 class MoodCard extends StatefulWidget {
 
-  final String title;
-  final IconData icon;
-  MoodCard(this.title,[ this.icon]);
+  final Scenario scenario;
+  MoodCard(this.scenario);
 
 //
 //  static final MoodCardContent content = MoodCardContent(title, icon);
@@ -44,7 +45,7 @@ class _MoodCardState extends State<MoodCard>{
           color: MoodThemeData.primaryColor,
           borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
         ),
-        child: _makeListTile(widget),
+        child: _makeListTile(widget.scenario),
       ),
     );
 
@@ -52,11 +53,11 @@ class _MoodCardState extends State<MoodCard>{
 
 
 // helper methods
-  Widget _makeListTile(widget) {
+  Widget _makeListTile(scenario) {
     return new ListTile(
       contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       onTap: (){
-        // TODO: Moodcard button navigation
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ScenarioPage(scenario: scenario,)));
       },
 
       leading: Container(
@@ -66,10 +67,10 @@ class _MoodCardState extends State<MoodCard>{
 
             border: new Border(
                 right: new BorderSide(width: .5, color: MoodThemeData.buttonColor))),
-        child: Icon(widget.icon, color: MoodThemeData.buttonColor, size: 30.0,),
+        child: Icon(scenario.icon, color: MoodThemeData.buttonColor, size: 30.0,),
       ),
       title: new Text(
-        widget.title,
+        scenario.title,
         style: new TextStyle(
             color: MoodThemeData.buttonColor,
             fontWeight: FontWeight.w300,

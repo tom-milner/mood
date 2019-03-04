@@ -13,8 +13,8 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       debugShowCheckedModeBanner: false,
         title: "mood",
-      theme: Theme.MoodThemeData.copyWith(
-
+      theme: new ThemeData(
+fontFamily: "Raleway"
       ),
       home: Main(),
     );

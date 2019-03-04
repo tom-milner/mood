@@ -6,8 +6,9 @@ final ThemeData MoodThemeData = new ThemeData(
     // 152,204,211
     primaryColor: Color.fromRGBO(245, 245, 245, 1),
 //  accentColor: Color.fromRGBO(58, 66, 86, 1.0),
-    canvasColor: Color.fromRGBO(229, 229, 229, 1.0),
+    canvasColor: Color.fromRGBO(239, 239, 239, 1.0),
     buttonColor: Color.fromRGBO(84, 152, 245, 1.0),
+    textSelectionColor: Color.fromRGBO(100, 100, 100, 1.0),
     // default font
     fontFamily: "Muli"
     // Text themes
