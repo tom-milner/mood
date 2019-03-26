@@ -4,6 +4,8 @@ import "package:mood_app/pages/exercises/exercises.dart" ;
 import "package:mood_app/pages/scenarios/scenarios.dart";
 import "package:mood_app/pages/calendar/calendar.dart";
 import "package:mood_app/pages/home/home.dart";
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class Main extends StatefulWidget {
   @override
@@ -36,6 +38,7 @@ class MainState extends State<Main> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       bottomNavigationBar: Container(
         height: 55.0,

@@ -12,21 +12,21 @@ import "package:mood_app/models/Scenario.dart";
 //}
 //
 
-class MoodCard extends StatefulWidget {
+class ScenarioCard extends StatefulWidget {
 
   final Scenario scenario;
-  MoodCard(this.scenario);
+  ScenarioCard(this.scenario);
 
 //
 //  static final MoodCardContent content = MoodCardContent(title, icon);
 //
 
-  _MoodCardState createState() => _MoodCardState();
+  _ScenarioCardState createState() => _ScenarioCardState();
 
 }
 
 
-class _MoodCardState extends State<MoodCard>{
+class _ScenarioCardState extends State<ScenarioCard>{
 
 
 
@@ -67,7 +67,7 @@ class _MoodCardState extends State<MoodCard>{
 
             border: new Border(
                 right: new BorderSide(width: .5, color: MoodThemeData.buttonColor))),
-        child: Icon(scenario.icon, color: MoodThemeData.buttonColor, size: 30.0,),
+//        child: Icon(scenario.icon, color: MoodThemeData.buttonColor, size: 30.0,),
       ),
       title: new Text(
         scenario.title,
