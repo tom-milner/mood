@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "153931765543",
+    "firebase_url": "https://mood-server.firebaseio.com",
+    "project_id": "mood-server",
+    "storage_bucket": "mood-server.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153931765543:android:8f103e30c7c9d6ba",
+        "android_client_info": {
+          "package_name": "com.tomfmilner.moodapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "153931765543-96cddg7ctd2iuo6mc9adb5vgume9scn1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6t3vg0h-CFZ9THV0i1yGz2fxgLiRina8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

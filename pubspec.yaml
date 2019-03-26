@@ -15,9 +15,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core: ^0.2.5 # add dependency for Firebase core
+  firebase_analytics: # analytics
 
-  flutter_sparkline:
-  flutter_staggered_grid_view:
+  flutter_sparkline: # sparkline - graph components
+  flutter_staggered_grid_view: # dashboard components
 
 
   # The following adds the Cupertino Icons font to your application.
