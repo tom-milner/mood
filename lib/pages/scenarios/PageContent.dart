@@ -27,11 +27,10 @@ class _PageContentState extends State<PageContent> {
 
   Widget _buildScenarioList(
       BuildContext context, List<DocumentSnapshot> snapshot) {
-    return new Expanded(
-        child: ListView(
-      shrinkWrap: true,
+    return ListView(
+//      shrinkWrap: true,
       children: snapshot.map((data) => _buildScenario(context, data)).toList(),
-    ));
+    );
   }
 
   @override

@@ -3,7 +3,6 @@ import "package:mood_app/ui/theme.dart";
 import "package:mood_app/pages/scenarios/ScenarioPage.dart";
 import "package:mood_app/models/Scenario.dart";
 
-
 // card content model
 //class MoodCardContent {
 //  final String title;
@@ -13,7 +12,6 @@ import "package:mood_app/models/Scenario.dart";
 //
 
 class ScenarioCard extends StatefulWidget {
-
   final Scenario scenario;
   ScenarioCard(this.scenario);
 
@@ -22,25 +20,18 @@ class ScenarioCard extends StatefulWidget {
 //
 
   _ScenarioCardState createState() => _ScenarioCardState();
-
 }
 
-
-class _ScenarioCardState extends State<ScenarioCard>{
-
-
-
+class _ScenarioCardState extends State<ScenarioCard> {
   @override
   Widget build(BuildContext context) {
-
-      return Card(
+    return Card(
       elevation: 2.0,
       margin: EdgeInsets.symmetric(horizontal: 5.0, vertical: 6.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5.0),
-        ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5.0),
+      ),
       child: Container(
-
         decoration: BoxDecoration(
           color: MoodThemeData.primaryColor,
           borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
@@ -48,42 +39,60 @@ class _ScenarioCardState extends State<ScenarioCard>{
         child: _makeListTile(widget.scenario),
       ),
     );
-
   }
-
 
 // helper methods
   Widget _makeListTile(scenario) {
-    return new ListTile(
-      contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ScenarioPage(scenario: scenario,)));
-      },
+    return Padding(
+      key: ValueKey(scenario.title),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: Container(
+        child: ListTile(
 
-      leading: Container(
-        padding: EdgeInsets.only(right: 30.0),
-        margin: EdgeInsets.only(right: 20.0),
-        decoration: new BoxDecoration(
+        title: new Text(
+          scenario.title,
+          style: new TextStyle(
+              color: MoodThemeData.buttonColor,
+              fontWeight: FontWeight.w300,
+              fontSize: 25.0),
+          textAlign: TextAlign.left,
+        ),
 
-            border: new Border(
-                right: new BorderSide(width: .5, color: MoodThemeData.buttonColor))),
-//        child: Icon(scenario.icon, color: MoodThemeData.buttonColor, size: 30.0,),
+        trailing: Icon(
+          Icons.keyboard_arrow_right,
+          color: MoodThemeData.buttonColor,
+          size: 40.0,
+        ),
       ),
-      title: new Text(
-        scenario.title,
-        style: new TextStyle(
-            color: MoodThemeData.buttonColor,
-            fontWeight: FontWeight.w300,
-            fontSize: 25.0),
-        textAlign: TextAlign.left,
-      ),
+        ),
+      );
 
-      trailing: Icon(
-        Icons.keyboard_arrow_right,
-        color: MoodThemeData.buttonColor,
-        size: 40.0,
-      ),
-    );
+
+
+//        leading: Container(
+//          padding: EdgeInsets.only(right: 30.0),
+//          margin: EdgeInsets.only(right: 20.0),
+//          decoration: new BoxDecoration(
+//              border: new Border(
+//                  right: new BorderSide(
+//                      width: .5, color: MoodThemeData.buttonColor))),
+////        child: Icon(scenario.icon, color: MoodThemeData.buttonColor, size: 30.0,),
+//        ),
+//        title: new Text(
+//          scenario.title,
+//          style: new TextStyle(
+//              color: MoodThemeData.buttonColor,
+//              fontWeight: FontWeight.w300,
+//              fontSize: 25.0),
+//          textAlign: TextAlign.left,
+//        ),
+//
+//        trailing: Icon(
+//          Icons.keyboard_arrow_right,
+//          color: MoodThemeData.buttonColor,
+//          size: 40.0,
+//        ),
+//      ),
+//    );
   }
-
 }
