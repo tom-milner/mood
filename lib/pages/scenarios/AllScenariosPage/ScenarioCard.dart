@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "package:mood_app/ui/theme.dart";
-import "package:mood_app/pages/scenarios/ScenarioPage.dart";
+import "package:mood_app/pages/scenarios/ScenarioPage/ScenarioPage.dart";
 import "package:mood_app/models/Scenario.dart";
 
 // card content model
@@ -27,7 +27,7 @@ class _ScenarioCardState extends State<ScenarioCard> {
   Widget build(BuildContext context) {
     return Card(
       elevation: 2.0,
-      margin: EdgeInsets.symmetric(horizontal: 5.0, vertical: 6.0),
+      margin: EdgeInsets.symmetric(vertical: 6.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5.0),
       ),
@@ -43,18 +43,18 @@ class _ScenarioCardState extends State<ScenarioCard> {
 
 // helper methods
   Widget _makeListTile(scenario) {
-    return Padding(
+    return Container(
       key: ValueKey(scenario.title),
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+//      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Container(
         child: ListTile(
-
+        onTap: ()=>Navigator.push(context, ScenarioPage()),
         title: new Text(
           scenario.title,
           style: new TextStyle(
               color: MoodThemeData.buttonColor,
               fontWeight: FontWeight.w300,
-              fontSize: 25.0),
+              fontSize: 20.0),
           textAlign: TextAlign.left,
         ),
 
