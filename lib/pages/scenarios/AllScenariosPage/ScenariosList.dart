@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:mood_app/models/Scenario.dart';
 import 'package:mood_app/pages/scenarios/AllScenariosPage/ScenarioCard.dart';
-import 'package:mood_app/services/scenarios/ScenarioService.dart';
 import "package:cloud_firestore/cloud_firestore.dart";
 
 // class to display scenarios
