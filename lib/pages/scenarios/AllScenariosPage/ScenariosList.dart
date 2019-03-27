@@ -4,15 +4,14 @@ import 'package:mood_app/pages/scenarios/AllScenariosPage/ScenarioCard.dart';
 import "package:cloud_firestore/cloud_firestore.dart";
 
 // class to display scenarios
-class PageContent extends StatefulWidget {
-  _PageContentState createState() => _PageContentState();
+class ScenariosList extends StatefulWidget {
+  _ScenariosListState createState() => _ScenariosListState();
 }
 
-class _PageContentState extends State<PageContent> {
+class _ScenariosListState extends State<ScenariosList> {
   // build individual scenario cards
   Widget _buildScenario(BuildContext context, DocumentSnapshot scenarios) {
     final scenario = Scenario.fromSnapshot(scenarios);
-    print(scenario);
 
     return new ScenarioCard(scenario);
   }

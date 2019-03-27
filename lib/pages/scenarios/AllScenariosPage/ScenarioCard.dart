@@ -48,8 +48,9 @@ class _ScenarioCardState extends State<ScenarioCard> {
 //      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Container(
         child: ListTile(
-        onTap: ()=>Navigator.push(context, ScenarioPage()),
-        title: new Text(
+          onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ScenarioPage(scenario: scenario,))),
+
+          title: new Text(
           scenario.title,
           style: new TextStyle(
               color: MoodThemeData.buttonColor,
