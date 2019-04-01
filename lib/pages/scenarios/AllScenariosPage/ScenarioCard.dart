@@ -23,8 +23,16 @@ class ScenarioCard extends StatefulWidget {
 }
 
 class _ScenarioCardState extends State<ScenarioCard> {
+
+
+
   @override
   Widget build(BuildContext context) {
+
+    print(widget.scenario);
+
+
+
     return Card(
       elevation: 2.0,
       margin: EdgeInsets.symmetric(vertical: 6.0),
@@ -44,6 +52,8 @@ class _ScenarioCardState extends State<ScenarioCard> {
 // helper methods
   Widget _makeListTile(scenario) {
     return Container(
+      alignment: Alignment.center,
+
       key: ValueKey(scenario.title),
 //      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Container(

@@ -15,9 +15,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_core: ^0.2.5 # add dependency for Firebase core
-  firebase_analytics: # analytics
-  cloud_firestore: # real time db
+  sqflite: any # SQLite Implement in flutter
+  path_provider: any # For finding db pat
 
   flutter_sparkline: # sparkline - graph components
   flutter_staggered_grid_view: # dashboard components
