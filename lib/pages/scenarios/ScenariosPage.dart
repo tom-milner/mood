@@ -3,17 +3,21 @@ import 'package:mood_app/pages/scenarios/AllScenariosPage/ScenariosList.dart';
 import "package:mood_app/widgets/PageTitle.dart";
 import "package:mood_app/widgets/SearchBar.dart";
 import "package:mood_app/ui/theme.dart";
+import "package:mood_app/services/ScenarioService.dart";
 
 class ScenariosPage extends StatefulWidget {
   _ScenariosPageState createState() => _ScenariosPageState();
-  List<dynamic> scenarios;
+
+  // TODO: build Scenario Bloc and fix this shit lol
+
 }
 
-class dummyData {
-  List<Map<String, dynamic>> data = [
-    {"title": "Title", "description": "testsstst", "content": "fdfdfdfdfddf"},
-  ];
-}
+//class dummyData {
+//  List<Map<String, dynamic>> data = [
+//    {"title": "Title", "description": "testsstst", "content": "fdfdfdfdfddf"},
+//  ];
+//}
+
 
 class _ScenariosPageState extends State<ScenariosPage> {
   String dropdownValue = "Hello";
@@ -85,7 +89,7 @@ class _ScenariosPageState extends State<ScenariosPage> {
 
               ],
             ),
-            ScenariosList(dummyData().data)
+            ScenariosList(ScenarioService.getScenarios())
           ]),
     );
   }

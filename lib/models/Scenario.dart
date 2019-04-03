@@ -11,13 +11,13 @@ class Scenario {
   Scenario(this.title, this.content, this.icon);
 
 //
-//  Scenario.fromMap(Map<String, dynamic> map, {this.reference})
-//    :assert(map["title"] != null),
-//  assert(map["content"] != null),
-//  assert(map["icon"] != null),
-//  title = map["title"],
-//  content = map["content"],
-//  icon = map["icon"];
+  Scenario.fromMap(Map<String, dynamic> map,)
+    :assert(map["title"] != null),
+  assert(map["content"] != null),
+  assert(map["icon"] != null),
+  title = map["title"],
+  content = map["content"],
+  icon = map["icon"];
 
 
 //  Scenario.fromSnapshot(DocumentSnapshot snapshot)

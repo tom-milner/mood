@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:mood_app/services/database/DatabaseTableCreator.dart';
 import "package:path/path.dart";
 import "package:sqflite/sqflite.dart";
 import "package:path_provider/path_provider.dart";
@@ -21,6 +22,19 @@ class DatabaseService {
 
   // method to create the database
   initDB(String tableName) async {
-    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    try {
+      Directory documentsDirectory = await getApplicationDocumentsDirectory();
+      String path = join(documentsDirectory.path, "MoodDB.db");
+
+      return await openDatabase(path, version: 1, onOpen: (db) {},
+          onCreate: (Database db, int version) async {
+        // create database if it doesn't already exist
+        await db.execute(DatabaseTableCreator.scenarios);
+      });
+    } catch (e) {
+      print("Error creating database");
+      print(e.toString());
+    }
   }
+
 }
