@@ -35,7 +35,7 @@ class _ScenarioCardState extends State<ScenarioCard> {
 
     return Card(
       elevation: 2.0,
-      margin: EdgeInsets.symmetric(vertical: 6.0),
+      margin: EdgeInsets.symmetric(vertical: 6.0, horizontal: 5.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5.0),
       ),
@@ -53,7 +53,6 @@ class _ScenarioCardState extends State<ScenarioCard> {
   Widget _makeListTile(scenario) {
     return Container(
       alignment: Alignment.center,
-
       key: ValueKey(scenario.title),
 //      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Container(

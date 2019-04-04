@@ -3,7 +3,8 @@ import 'package:mood_app/pages/scenarios/AllScenariosPage/ScenariosList.dart';
 import "package:mood_app/widgets/PageTitle.dart";
 import "package:mood_app/widgets/SearchBar.dart";
 import "package:mood_app/ui/theme.dart";
-import "package:mood_app/blocs/ScenarioBloc.dart";
+
+
 class ScenariosPage extends StatefulWidget {
   _ScenariosPageState createState() => _ScenariosPageState();
 }
@@ -15,11 +16,17 @@ class _ScenariosPageState extends State<ScenariosPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10.0),
-      child: new Column(
+//      padding: EdgeInsets.symmetric(vertical: 10.0),
+      child: new SingleChildScrollView(
 //          mainAxisAlignment: MainAxisAlignment.center,
+
+          child: Column(
           children: <Widget>[
-            new PageTitle("SCENARIOS"),
+//            SizedBox(
+//              height: 20,
+//            ),
+
+//            new PageTitle("SCENARIOS"),
 
 //            new Container(
 //                alignment: Alignment.centerLeft,
@@ -32,6 +39,7 @@ class _ScenariosPageState extends State<ScenariosPage> {
 //                )),
 
             Row(
+              
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,7 +80,7 @@ class _ScenariosPageState extends State<ScenariosPage> {
             ),
             ScenariosList()
           ]),
-    );
+    ),);
   }
 }
 //TODO: Dynamic section rendering e.g. favourites, then new etc.

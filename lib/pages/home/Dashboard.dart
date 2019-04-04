@@ -11,7 +11,7 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   List<StaggeredTile> _staggeredTiles = <StaggeredTile>[
-    StaggeredTile.count(4, 1),
+//    StaggeredTile.count(4, 1),
     StaggeredTile.count(4, 2),
     StaggeredTile.count(4, 2),
     StaggeredTile.count(2, 2),
@@ -21,7 +21,7 @@ class _DashboardState extends State<Dashboard> {
   ];
 
   List<Widget> _tiles = <Widget>[
-    PageTitle("MOOD"),
+//    PageTitle("MOOD"),
     buildItemTitle("Overall"),
     buildItemTitle("This Week"),
     buildItemTitle("Next Event"),
@@ -59,6 +59,10 @@ class _DashboardState extends State<Dashboard> {
       ),
     );
   }
+
+
+
+
 
   @override
   Widget build(BuildContext context) {

@@ -1,42 +1,54 @@
 import "package:flutter/material.dart";
 import 'package:mood_app/models/Scenario.dart';
 import 'package:mood_app/pages/scenarios/AllScenariosPage/ScenarioCard.dart';
+import "package:mood_app/blocs/ScenarioBloc.dart";
 
 // class to display scenarios
 class ScenariosList extends StatefulWidget {
-
-  var scenarios;
-  ScenariosList(this.scenarios);
-
   _ScenariosListState createState() => _ScenariosListState();
 }
 
 class _ScenariosListState extends State<ScenariosList> {
+
+  final scenarioBloc = ScenarioBloc();
+
+
+
+
   // build individual scenario cards
-  Widget _buildScenarioListItem(BuildContext context, scenario) {
-//    Scenario scenario = Scenario.fromSnapshot(scenarios);
-  Scenario newScenario = new Scenario(scenario["title"], scenario["content"], scenario["icon"]);
-    return new ScenarioCard(newScenario);
+  Widget _buildScenarioListItem(Scenario scen) {
+//        new Scenario(scenario["title"], scenario["content"], scenario["icon"]);
+    return new ScenarioCard(scen);
   }
 
-  Widget _buildScenarioList(
-      BuildContext context, List<dynamic> snapshot) {
-    return ListView.builder(
-      padding: EdgeInsets.all(0),
-      shrinkWrap: true,
+  Widget _buildScenarioList(BuildContext context) {
+    return StreamBuilder(
+        stream: scenarioBloc.scenarios,
+        builder:
+            (BuildContext context, AsyncSnapshot<List<Scenario>> snapshot) {
+
+          if (!snapshot.hasData) {
+            return CircularProgressIndicator();
+          }
+          return ListView.builder(
+
+            physics: NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.all(0),
+            shrinkWrap: true,
 //      padding: EdgeInsets.all(0),
-    itemExtent: 80.0,
-      itemCount: widget.scenarios.length,
-      itemBuilder: (context, index){
-        print(widget.scenarios.length);
-        return _buildScenarioListItem(context, widget.scenarios[index]);
-      },
+            itemExtent: 90.0,
+            itemCount: snapshot.data.length,
+            itemBuilder: (BuildContext context, int index) {
+              Scenario scen = snapshot.data[index];
+              return _buildScenarioListItem(scen);
+            },
 //      itemBuilder: snapshot.map((data) => _buildScenario(context, data)).toList(),
-    );
+          );
+        });
   }
 
   @override
   Widget build(BuildContext context) {
-     return _buildScenarioList(context, widget.scenarios);
+    return _buildScenarioList(context);
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import "package:mood_app/ui/theme.dart";
 import "package:mood_app/pages/exercises/exercises.dart" ;
-import "package:mood_app/pages/scenarios/ScenariosPage.dart";
+import "package:mood_app/pages/scenarios/AllScenariosPage/ScenariosPage.dart";
 import "package:mood_app/pages/calendar/calendar.dart";
 import "package:mood_app/pages/home/Home.dart";
 
@@ -38,6 +38,24 @@ class MainState extends State<Main> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("Mood",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.w300
+        ),
+        ),
+        backgroundColor: MoodThemeData.buttonColor,
+
+      ),
+
+      drawer: Drawer(
+        elevation: 2,
+          child:IconButton(icon: Icon(Icons.list), onPressed: null)
+      ),
+
       bottomNavigationBar: Container(
         height: 55.0,
         child: new BottomAppBar(
