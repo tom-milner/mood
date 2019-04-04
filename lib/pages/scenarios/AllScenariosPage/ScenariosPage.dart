@@ -3,20 +3,10 @@ import 'package:mood_app/pages/scenarios/AllScenariosPage/ScenariosList.dart';
 import "package:mood_app/widgets/PageTitle.dart";
 import "package:mood_app/widgets/SearchBar.dart";
 import "package:mood_app/ui/theme.dart";
-import "package:mood_app/services/ScenarioService.dart";
-
+import "package:mood_app/blocs/ScenarioBloc.dart";
 class ScenariosPage extends StatefulWidget {
   _ScenariosPageState createState() => _ScenariosPageState();
-
-  // TODO: build Scenario Bloc and fix this shit lol
-
 }
-
-//class dummyData {
-//  List<Map<String, dynamic>> data = [
-//    {"title": "Title", "description": "testsstst", "content": "fdfdfdfdfddf"},
-//  ];
-//}
 
 
 class _ScenariosPageState extends State<ScenariosPage> {
@@ -66,7 +56,7 @@ class _ScenariosPageState extends State<ScenariosPage> {
 //                    onChanged: (_) {},
 //                  ),
 //                ),
-
+              // TODO: Sort Function
               PopupMenuButton<String>(
                 padding: EdgeInsets.all(0),
                 tooltip: "Sort",
@@ -74,22 +64,13 @@ class _ScenariosPageState extends State<ScenariosPage> {
                 itemBuilder: (BuildContext context){
                   return <PopupMenuEntry<String>>[
                     const PopupMenuItem(child: Text("Mental"), value: "GoodBye",),
-                    const PopupMenuItem(child: Text("Hello"), value: "GoodBye",),
-                    const PopupMenuItem(child: Text("Hello"), value: "GoodBye",),
-                    const PopupMenuItem(child: Text("Hello"), value: "GoodBye",),
-                    const PopupMenuItem(child: Text("Hello"), value: "GoodBye",),
-                    const PopupMenuItem(child: Text("Hello"), value: "GoodBye",),
-                    const PopupMenuItem(child: Text("Hello"), value: "GoodBye",),
-                    const PopupMenuItem(child: Text("Hello"), value: "GoodBye",),
-                    const PopupMenuItem(child: Text("Hello"), value: "GoodBye",),
-                    const PopupMenuItem(child: Text("Hello"), value: "GoodBye",),
                   ];
                 },
               )
 
               ],
             ),
-            ScenariosList(ScenarioService.getScenarios())
+            ScenariosList()
           ]),
     );
   }
