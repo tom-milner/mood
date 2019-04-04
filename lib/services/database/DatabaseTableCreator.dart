@@ -1,3 +1,6 @@
+
+// class to hold database table creation statements.
+
 class DatabaseTableCreator {
   static const String scenarios = ("CREATE TABLE Scenarios ("
       "scenarioId INTEGER PRIMARY_KEY"
