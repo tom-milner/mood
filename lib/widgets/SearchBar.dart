@@ -19,7 +19,7 @@ class _SearchBarState extends State<SearchBar> {
     }
 
     return Container(
-      width: 300,
+      width: 280,
       padding: EdgeInsets.all(0),
       margin: EdgeInsets.symmetric(vertical: 15, horizontal: 7.5),
       child: Container(
