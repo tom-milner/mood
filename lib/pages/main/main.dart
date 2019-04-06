@@ -1,3 +1,4 @@
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import "package:mood_app/ui/theme.dart";
 import "package:mood_app/pages/exercises/exercises.dart";
@@ -38,52 +39,48 @@ class MainState extends State<Main> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        iconTheme: Theme.of(context).appBarTheme.iconTheme,
         title: Text(
           appBarTitle,
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.w300),
+          style: Theme.of(context).textTheme.headline,
         ),
-        backgroundColor: MoodThemeData.buttonColor,
+        backgroundColor: Theme.of(context).appBarTheme.color,
       ),
-      drawer: MoodDrawer(),
+      drawer: MoodDrawer(
+          (DynamicTheme.of(context).data == MoodTheme.DarkMoodThemeData)),
       bottomNavigationBar: Container(
         height: 55.0,
         child: new BottomAppBar(
-          color: MoodThemeData.canvasColor,
+          color: Theme.of(context).canvasColor,
           child: new Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               IconButton(
-                icon: Icon(
-                  Icons.home,
-                ),
-                color: MoodThemeData.buttonColor,
-                disabledColor: Colors.white,
+                icon: Icon(Icons.home),
+                color: Theme.of(context).iconTheme.color,
                 onPressed: () {
                   changePage(0, "Mood");
                 },
               ),
               IconButton(
                 icon: Icon(Icons.library_books),
-                color: MoodThemeData.buttonColor,
-                disabledColor: Colors.white,
+                color: Theme.of(context).iconTheme.color,
                 onPressed: () {
                   changePage(1, "Scenarios");
                 },
               ),
               IconButton(
                 icon: Icon(Icons.accessibility_new),
-                color: MoodThemeData.buttonColor,
-                disabledColor: Colors.white,
+                color: Theme.of(context).iconTheme.color,
                 onPressed: () {
                   changePage(2, "Exercises");
                 },
               ),
               IconButton(
                 icon: Icon(Icons.calendar_today),
-                color: MoodThemeData.buttonColor,
-                disabledColor: Colors.white,
+                color: Theme.of(context).iconTheme.color,
                 onPressed: () {
                   changePage(3, "Calendar");
                 },
@@ -93,7 +90,7 @@ class MainState extends State<Main> {
         ),
       ),
       body: _pages[_currentIndex],
-      backgroundColor: MoodThemeData.canvasColor,
+      backgroundColor: Theme.of(context).canvasColor,
     );
   }
 }

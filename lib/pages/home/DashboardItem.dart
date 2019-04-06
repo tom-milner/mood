@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import "package:mood_app/ui/theme.dart";
 
 class DashboardItem extends StatefulWidget {
   final Widget child;
@@ -14,7 +13,7 @@ class _DashboardItemState extends State<DashboardItem> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: MoodThemeData.primaryColor,
+      color: Theme.of(context).buttonColor,
       elevation: 2.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),

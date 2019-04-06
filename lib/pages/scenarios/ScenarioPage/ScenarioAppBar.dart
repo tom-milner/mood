@@ -14,13 +14,13 @@ class ScenarioAppBar extends StatelessWidget implements PreferredSizeWidget{
         title: new Text(
           scenario.title,
           style: new TextStyle(
-            color: MoodThemeData.buttonColor,
+            color: Theme.of(context).primaryColor,
             fontSize: 35.0,
             fontWeight: FontWeight.w300,
           ),
         ),
         elevation: 0,
-        backgroundColor: MoodThemeData.primaryColor,
+        backgroundColor: Theme.of(context).buttonColor,
     );
   }
 

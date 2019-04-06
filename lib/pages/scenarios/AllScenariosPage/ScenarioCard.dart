@@ -1,3 +1,4 @@
+import 'package:dynamic_theme/dynamic_theme.dart';
 import "package:flutter/material.dart";
 import "package:mood_app/ui/theme.dart";
 import "package:mood_app/pages/scenarios/ScenarioPage/ScenarioPage.dart";
@@ -41,7 +42,7 @@ class _ScenarioCardState extends State<ScenarioCard> {
       ),
       child: Container(
         decoration: BoxDecoration(
-          color: MoodThemeData.primaryColor,
+          color: Theme.of(context).buttonColor,
           borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
         ),
         child: _makeListTile(widget.scenario),
@@ -61,48 +62,17 @@ class _ScenarioCardState extends State<ScenarioCard> {
 
           title: new Text(
           scenario.title,
-          style: new TextStyle(
-              color: MoodThemeData.buttonColor,
-              fontWeight: FontWeight.w300,
-              fontSize: 20.0),
-          textAlign: TextAlign.left,
+          style: Theme.of(context).textTheme.title,
         ),
 
         trailing: Icon(
           Icons.keyboard_arrow_right,
-          color: MoodThemeData.buttonColor,
+          color: Theme.of(context).iconTheme.color,
           size: 40.0,
         ),
       ),
         ),
       );
 
-
-
-//        leading: Container(
-//          padding: EdgeInsets.only(right: 30.0),
-//          margin: EdgeInsets.only(right: 20.0),
-//          decoration: new BoxDecoration(
-//              border: new Border(
-//                  right: new BorderSide(
-//                      width: .5, color: MoodThemeData.buttonColor))),
-////        child: Icon(scenario.icon, color: MoodThemeData.buttonColor, size: 30.0,),
-//        ),
-//        title: new Text(
-//          scenario.title,
-//          style: new TextStyle(
-//              color: MoodThemeData.buttonColor,
-//              fontWeight: FontWeight.w300,
-//              fontSize: 25.0),
-//          textAlign: TextAlign.left,
-//        ),
-//
-//        trailing: Icon(
-//          Icons.keyboard_arrow_right,
-//          color: MoodThemeData.buttonColor,
-//          size: 40.0,
-//        ),
-//      ),
-//    );
   }
 }

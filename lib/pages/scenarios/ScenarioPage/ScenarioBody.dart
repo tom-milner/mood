@@ -19,7 +19,7 @@ class ScenarioBody extends StatelessWidget{
               scenario.content,
               style: TextStyle(
                 fontSize:18.0,
-                color: MoodThemeData.textSelectionColor
+                color: Theme.of(context).textSelectionColor
               ),
             )
           ],

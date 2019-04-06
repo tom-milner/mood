@@ -36,7 +36,7 @@ class _ScenariosListState extends State<ScenariosList> {
             padding: EdgeInsets.all(0),
             shrinkWrap: true,
 //      padding: EdgeInsets.all(0),
-            itemExtent: 90.0,
+            itemExtent: 100.0,
             itemCount: snapshot.data.length,
             itemBuilder: (BuildContext context, int index) {
               Scenario scen = snapshot.data[index];
@@ -50,5 +50,11 @@ class _ScenariosListState extends State<ScenariosList> {
   @override
   Widget build(BuildContext context) {
     return _buildScenarioList(context);
+  }
+
+  @override
+  void dispose(){
+    scenarioBloc.dispose();
+    super.dispose();
   }
 }

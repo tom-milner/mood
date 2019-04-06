@@ -20,22 +20,24 @@ class _DashboardState extends State<Dashboard> {
     StaggeredTile.count(2, 1),
   ];
 
-  List<Widget> _tiles = <Widget>[
+  List<Widget> _buildTiles() {
+    return <Widget>[
 //    PageTitle("MOOD"),
-    buildItemTitle("Overall"),
-    buildItemTitle("This Week"),
-    buildItemTitle("Next Event"),
-    buildIconButton(Icons.accessibility_new, "test"),
-    buildIconButton(Icons.calendar_today, "test"),
-    buildIconButton(Icons.library_books, "test"),
-  ];
+      buildItemTitle("Overall"),
+      buildItemTitle("This Week"),
+      buildItemTitle("Next Event"),
+      buildIconButton(Icons.accessibility_new, "test"),
+      buildIconButton(Icons.calendar_today, "test"),
+      buildIconButton(Icons.library_books, "test"),
+    ];
+  }
 
-  static Widget buildIconButton(IconData icon, String route) {
+  Widget buildIconButton(IconData icon, String route) {
     return new DashboardItem(
       IconButton(
         icon: Icon(icon),
-        disabledColor: MoodThemeData.buttonColor,
-        color: MoodThemeData.buttonColor,
+        disabledColor: Theme.of(context).iconTheme.color,
+        color: Theme.of(context).iconTheme.color,
         onPressed: () {
           // TODO button navigation in dashboard
         },
@@ -44,25 +46,18 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  static Widget buildItemTitle(String text) {
+  Widget buildItemTitle(String text) {
     return new DashboardItem(
       Container(
         padding: EdgeInsets.only(top: 10, left: 10),
         child: new Text(
           text,
-          style: new TextStyle(
-              color: MoodThemeData.buttonColor,
-              fontWeight: FontWeight.w300,
-              fontSize: 20.0),
+          style: Theme.of(context).textTheme.display1,
           textAlign: TextAlign.left,
         ),
       ),
     );
   }
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +67,7 @@ class _DashboardState extends State<Dashboard> {
         child: new StaggeredGridView.count(
       crossAxisCount: 4,
       staggeredTiles: _staggeredTiles,
-      children: _tiles,
+      children: _buildTiles(),
       mainAxisSpacing: 8.0,
       crossAxisSpacing: 8.0,
       padding: const EdgeInsets.all(4.0),
