@@ -11,7 +11,6 @@ class ScenarioBloc {
   get scenarios => _scenarioController.stream;
 
   ScenarioBloc() {
-    print("init bloc");
     getAllScenarios();
   }
 
