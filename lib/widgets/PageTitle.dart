@@ -18,14 +18,9 @@ class _PageTitleState extends State<PageTitle> {
       child: new Center(
       child: new Text(
         widget.text,
-        style: TextStyle(
-          fontSize: 40.0,
-          fontFamily: "Muli",
-          color: MoodThemeData.buttonColor,
-          fontWeight: FontWeight.w300
+        style: Theme.of(context).textTheme.headline,
         ),
-        textAlign: TextAlign.center,
-      ),),
+      ),
     );
   }
 }

@@ -1,21 +1,23 @@
 import "package:flutter/material.dart";
-import "package:mood_app/ui/theme.dart";
+import 'package:mood_app/blocs/FilterScenariosBloc.dart';
 
 class SearchBar extends StatefulWidget {
   _SearchBarState createState() => _SearchBarState();
 
-  final List<dynamic> searchItems;
 
-  SearchBar({this.searchItems});
 }
 
-class _SearchBarState extends State<SearchBar> {
+class _SearchBarState extends State<SearchBar>{
+
+  // instantiate filter bloc
+  FilterScenariosBloc filterBloc = new FilterScenariosBloc();
+
+
   @override
   Widget build(BuildContext context) {
     // function to filter the scenarios depending ton the users input.
     void filterSearchResults(String query) {
-      List<String> searchList = List<String>();
-//      searchList.addAll()
+
     }
 
     return Container(
@@ -27,15 +29,12 @@ class _SearchBarState extends State<SearchBar> {
         child: TextField(
           onChanged: (query) => filterSearchResults(query),
           cursorWidth: 1.5,
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.w400,
-          ),
+          style: Theme.of(context).textTheme.body1,
           decoration: InputDecoration(
             hintText: "Search",
             suffixIcon: Icon(
               Icons.search,
-              color: MoodThemeData.buttonColor,
+              color: Theme.of(context).primaryColor,
             ),
 //          contentPadding: EdgeInsets.symmetric(vertical: 7, horizontal: 16),
             contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
@@ -43,10 +42,10 @@ class _SearchBarState extends State<SearchBar> {
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(25)),
                 borderSide:
-                    BorderSide(color: MoodThemeData.buttonColor, width: 2)),
+                    BorderSide(color: Theme.of(context).primaryColor, width: 2)),
             enabledBorder: OutlineInputBorder(
               borderSide:
-                  BorderSide(color: MoodThemeData.buttonColor, width: 1.0),
+                  BorderSide(color: Theme.of(context).primaryColor, width: 1.0),
               borderRadius: BorderRadius.all(
                 Radius.circular(25),
               ),
