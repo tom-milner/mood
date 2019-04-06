@@ -1,23 +1,25 @@
 import "package:flutter/material.dart";
-import 'package:mood_app/ui/theme.dart' as Theme;
+import 'package:mood_app/ui/theme.dart';
 import "package:mood_app/pages/main/main.dart";
-
+import 'package:dynamic_theme/dynamic_theme.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-
+  bool isDarkTheme = false;
   @override
   Widget build(BuildContext context) {
-
-
-    return new MaterialApp(
-      debugShowCheckedModeBanner: false,
-        title: "mood",
-      theme: new ThemeData(
-fontFamily: "Raleway"
-      ),
-      home: Main(),
-    );
+    return new DynamicTheme(
+      // TODO: Use brightness to determine theme
+        data: (brightness) => MoodTheme.LightMoodThemeData.copyWith(
+        ),
+        themedWidgetBuilder: (context, theme) {
+          return new MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: "Mood",
+            theme: theme,
+            home: new Main(),
+          );
+        });
   }
 }
