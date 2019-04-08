@@ -8,6 +8,7 @@ class ScenariosPage extends StatefulWidget {
 
 class _ScenariosPageState extends State<ScenariosPage> {
   String dropdownValue = "Hello";
+  String filterTerm = "";
 
   @override
   Widget build(BuildContext context) {

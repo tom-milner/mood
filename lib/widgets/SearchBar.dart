@@ -9,15 +9,15 @@ class SearchBar extends StatefulWidget {
 
 class _SearchBarState extends State<SearchBar>{
 
-  // instantiate filter bloc
-  FilterScenariosBloc filterBloc = new FilterScenariosBloc();
+  FilterScenariosBloc _filterScenariosBloc = FilterScenariosBloc();
+
 
 
   @override
   Widget build(BuildContext context) {
     // function to filter the scenarios depending ton the users input.
     void filterSearchResults(String query) {
-
+       _filterScenariosBloc.doFilter(query);
     }
 
     return Container(
@@ -27,6 +27,7 @@ class _SearchBarState extends State<SearchBar>{
       child: Container(
         height: 40,
         child: TextField(
+
           onChanged: (query) => filterSearchResults(query),
           cursorWidth: 1.5,
           style: Theme.of(context).textTheme.body1,
@@ -36,7 +37,6 @@ class _SearchBarState extends State<SearchBar>{
               Icons.search,
               color: Theme.of(context).primaryColor,
             ),
-//          contentPadding: EdgeInsets.symmetric(vertical: 7, horizontal: 16),
             contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
 
             focusedBorder: OutlineInputBorder(

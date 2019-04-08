@@ -36,11 +36,13 @@ class _ScenarioCardState extends State<ScenarioCard> {
 
     return Card(
       elevation: 2.0,
+
       margin: EdgeInsets.symmetric(vertical: 6.0, horizontal: 5.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5.0),
       ),
       child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
           color: Theme.of(context).buttonColor,
           borderRadius: new BorderRadius.all(new Radius.circular(5.0)),

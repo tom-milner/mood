@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:mood_app/blocs/FilterScenariosBloc.dart';
 import 'package:mood_app/models/Scenario.dart';
 import 'package:mood_app/pages/scenarios/AllScenariosPage/ScenarioCard.dart';
 import "package:mood_app/blocs/ScenarioBloc.dart";
@@ -9,41 +10,48 @@ class ScenariosList extends StatefulWidget {
 }
 
 class _ScenariosListState extends State<ScenariosList> {
-
   final scenarioBloc = ScenarioBloc();
-
-
-
+  final filterScenariosBloc = FilterScenariosBloc();
 
   // build individual scenario cards
-  Widget _buildScenarioListItem(Scenario scen) {
-//        new Scenario(scenario["title"], scenario["content"], scenario["icon"]);
-    return new ScenarioCard(scen);
+  Widget _buildScenarioListItem(Scenario scen, String filter) {
+    if (!(filter == null || filter == "")) {
+      print("null filter");
+      if (!(scen.title.contains(filter))) {
+        print("match!");
+        return ScenarioCard(scen);
+      }
+    }
+    return Container();
   }
 
   Widget _buildScenarioList(BuildContext context) {
     return StreamBuilder(
-        stream: scenarioBloc.scenarios,
-        builder:
-            (BuildContext context, AsyncSnapshot<List<Scenario>> snapshot) {
+        stream: filterScenariosBloc.filterQuery,
+        builder: (BuildContext context,
+            AsyncSnapshot filterSnapshot) {
+          return StreamBuilder(
+              stream: scenarioBloc.scenarios,
+              builder: (BuildContext context, AsyncSnapshot scenariosSnapshot) {
+                print("building");
+                if (!scenariosSnapshot.hasData) return CircularProgressIndicator();
 
-          if (!snapshot.hasData) {
-            return CircularProgressIndicator();
-          }
-          return ListView.builder(
+                print("Scenarios Snapshot: ${scenariosSnapshot.toString()}");
+                print("Filter Snapshot: ${filterSnapshot.toString()}");
 
-            physics: NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.all(0),
-            shrinkWrap: true,
-//      padding: EdgeInsets.all(0),
-            itemExtent: 100.0,
-            itemCount: snapshot.data.length,
-            itemBuilder: (BuildContext context, int index) {
-              Scenario scen = snapshot.data[index];
-              return _buildScenarioListItem(scen);
-            },
-//      itemBuilder: snapshot.map((data) => _buildScenario(context, data)).toList(),
-          );
+                return ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.all(0),
+                  shrinkWrap: true,
+                  itemCount: scenariosSnapshot.data.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    Scenario scen = scenariosSnapshot.data[index];
+                    print("Scenario in streambuilder: ${scen.title}");
+                    print("Filter Snapshot Data: ${filterSnapshot.data}");
+                    return _buildScenarioListItem(scen, filterSnapshot.data);
+                  },
+                );
+              });
         });
   }
 
@@ -53,7 +61,7 @@ class _ScenariosListState extends State<ScenariosList> {
   }
 
   @override
-  void dispose(){
+  void dispose() {
     scenarioBloc.dispose();
     super.dispose();
   }

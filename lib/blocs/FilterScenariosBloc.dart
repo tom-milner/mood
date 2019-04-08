@@ -1,47 +1,23 @@
 import 'dart:async';
 
-import 'package:mood_app/blocs/ScenarioBloc.dart';
-import 'package:mood_app/models/Scenario.dart';
-
 class FilterScenariosBloc {
   // stream - only need one listener
-  final _searchController = StreamController<List<Scenario>>();
-  final _scenarioBloc = ScenarioBloc();
+  final _searchController = StreamController<String>.broadcast();
 
-  get filteredScenariosStream => _searchController.stream;
-
-  List<Scenario> initialScenarios;
-  List<Scenario> filteredScenarios;
+  // output stream
+  get filterQuery => _searchController.stream;
 
   FilterScenariosBloc() {
-    _scenarioBloc
-        .getAllScenarios()
-        .then((scenarios) => initialScenarios = scenarios)
-        .then(getFilteredScenarios())
-        .error(print((error) => "Error fetching scenarios: $error "));
-  }
-
-  // add filtered list to stream
-  getFilteredScenarios() {
-    _searchController.sink.add(filteredScenarios);
-  }
-
-  // filter list depending on search term (String term)
-  doFilter(String term) {
-    // find matches
-    print(initialScenarios);
-    initialScenarios.forEach((scenario){
-      if(scenario.title.contains(term)){
-        filteredScenarios.add(scenario);
-      }
-    });
-    // return updated list
-    getFilteredScenarios();
+    doFilter(" ");
   }
 
   dispose() {
-    // close stream when not in use to save resources.
-    _scenarioBloc.dispose();
+    // close the stream when not in use to save resources
     _searchController.close();
+  }
+
+  doFilter(String query) {
+    print("doFilter query: $query");
+    _searchController.sink.add(query);
   }
 }
