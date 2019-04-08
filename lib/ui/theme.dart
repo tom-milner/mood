@@ -15,16 +15,16 @@ class MoodTheme {
       color: Color.fromRGBO(84, 152, 245, 1.0),
     ),
     appBarTheme: AppBarTheme(
-        color: Color.fromRGBO(84, 152, 245, 1.0),
+        color: Colors.transparent,
         iconTheme: IconThemeData(
-          color: Colors.white,
+          color:  Color.fromRGBO(84, 152, 245, 1.0),
         )),
     // Text themes
     textTheme: TextTheme(
       headline: TextStyle(
           fontSize: 35,
           fontFamily: "Basier",
-          color: Colors.white,
+          color:  Color.fromRGBO(84, 152, 245, 1.0),
           fontWeight: FontWeight.w300),
       title: TextStyle(
           fontSize: 23, fontWeight: FontWeight.w300, color: Colors.black),
@@ -58,7 +58,7 @@ class MoodTheme {
     ),
 
     appBarTheme: AppBarTheme(
-        color: Color.fromRGBO(60, 60, 60, 1),
+        color: Colors.transparent,
         iconTheme: IconThemeData(
           color: Colors.white,
         )),

@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:mood_app/pages/home/DashboardItem.dart";
+import "package:mood_app/widgets/MoodCard.dart";
 import 'package:mood_app/widgets/PageTitle.dart';
 import 'package:mood_app/ui/theme.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -33,8 +33,8 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Widget buildIconButton(IconData icon, String route) {
-    return new DashboardItem(
-      IconButton(
+    return new MoodCard(
+      child: IconButton(
         icon: Icon(icon),
         disabledColor: Theme.of(context).iconTheme.color,
         color: Theme.of(context).iconTheme.color,
@@ -47,9 +47,9 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Widget buildItemTitle(String text) {
-    return new DashboardItem(
-      Container(
-        padding: EdgeInsets.only(top: 10, left: 10),
+    return new MoodCard(
+      child: Container(
+        padding: EdgeInsets.all(10),
         child: new Text(
           text,
           style: Theme.of(context).textTheme.display1,

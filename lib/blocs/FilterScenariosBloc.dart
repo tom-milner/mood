@@ -2,7 +2,7 @@ import 'dart:async';
 
 class FilterScenariosBloc {
   // stream - only need one listener
-  final _searchController = StreamController<String>.broadcast();
+  final _searchController = StreamController<String>();
 
   // output stream
   get filterQuery => _searchController.stream;

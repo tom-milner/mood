@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import "package:mood_app/ui/theme.dart";
 import "package:mood_app/pages/exercises/exercises.dart";
 import "package:mood_app/pages/scenarios/AllScenariosPage/ScenariosPage.dart";
-import "package:mood_app/pages/calendar/calendar.dart";
+import "package:mood_app/pages/tracker/TrackerPage.dart";
 import "package:mood_app/pages/home/Dashboard.dart";
 import "package:mood_app/pages/main/MoodDrawer.dart";
 
@@ -31,13 +31,14 @@ class MainState extends State<Main> {
     Dashboard(),
     ScenariosPage(),
     ExercisesPage(),
-    CalendarPage(),
+    TrackerPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         centerTitle: true,
         iconTheme: Theme.of(context).appBarTheme.iconTheme,
         title: Text(
@@ -58,6 +59,7 @@ class MainState extends State<Main> {
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               IconButton(
+
                 icon: Icon(Icons.home),
                 color: Theme.of(context).iconTheme.color,
                 onPressed: () {

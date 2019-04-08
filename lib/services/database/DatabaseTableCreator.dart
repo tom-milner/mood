@@ -10,4 +10,9 @@ class DatabaseTableCreator {
       // Exercise IDs are stored in CSV format
       "relevantExercises TEXT"
       ")");
+
+  static const String Events = (
+    "CREATE TABLE Events ("
+      "eventId IN"
+  );
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class Scenario {
-  final int id = 0;
   final String title ;
   final String content ;
   final String icon ;
@@ -11,14 +10,12 @@ class Scenario {
 
 //
   Scenario.fromMap(Map<String, dynamic> map,)
-//    :assert(map["title"] != null),
-//  assert(map["id"] != null),
-//  assert(map["content"] != null),
-//  assert(map["icon"] != null),
-  :title = map["title"],
+    :assert(map["title"] != null),
+  assert(map["content"] != null),
+  assert(map["icon"] != null),
+  title = map["title"],
   content = map["content"],
   icon = map["icon"];
-//  id = map["id"];
 
 
 

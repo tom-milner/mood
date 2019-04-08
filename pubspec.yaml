@@ -18,9 +18,10 @@ dependencies:
   sqflite: any # SQLite Implement in flutter
   path_provider: any # For finding db pat
   dynamic_theme: any # For dynamic themes (e.g. dark mode)
+  flutter_sparkline: any # sparkline - graph components
+  flutter_staggered_grid_view: any # dashboard components
+  intl: ^0.15.8 # localizations
 
-  flutter_sparkline: # sparkline - graph components
-  flutter_staggered_grid_view: # dashboard components
 
 
   # The following adds the Cupertino Icons font to your application.
