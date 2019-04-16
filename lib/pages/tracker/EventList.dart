@@ -12,6 +12,7 @@ class _eventListState extends State<EventList> {
     Event("Event", "NOtes ntoes", 1, 1554748182661),
     Event("Event", "NOtes ntoes", 5, 1554748182661),
     Event("Event", "NOtes ntoes", 3, 1554748182661),
+    Event("Event", "NOtes ntoes", 2, 1554748182661),
   ];
 
   final List<EventCard> eventsCards =

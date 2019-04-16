@@ -13,6 +13,10 @@ class DatabaseTableCreator {
 
   static const String Events = (
     "CREATE TABLE Events ("
-      "eventId IN"
+      "eventId INTEGER PRIMARY_KEY"
+      "title TEXT"
+      "notes TEXT"
+      "rating INTEGER"
+      "millisFromEpoch INTEGER"
   );
 }

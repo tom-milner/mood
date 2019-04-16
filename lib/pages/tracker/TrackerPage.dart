@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mood_app/pages/tracker/EventList.dart';
+import 'package:mood_app/pages/tracker/EventsPage/EventsPage.dart';
 import "package:mood_app/widgets/MoodCard.dart";
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -22,21 +23,29 @@ class _trackerPageState extends State<TrackerPage> {
             StaggeredTile.count(2, 1),
           ],
           children: <Widget>[
-            MoodCard(
-              child: Container(
-                padding: EdgeInsets.all(10),
-                child: Column(
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Text(
-                          "Today",
-                          style: Theme.of(context).textTheme.display1,
-                        ),
-                      ],
-                    ),
-                    EventList(),
-                  ],
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => EventsPage()));
+              },
+              child: MoodCard(
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            "Today",
+                            style: Theme.of(context).textTheme.display1,
+                          ),
+                        ],
+                      ),
+                      EventList(),
+                    ],
+                  ),
                 ),
               ),
             ),

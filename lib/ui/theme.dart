@@ -1,6 +1,17 @@
 import "package:flutter/material.dart";
 
 class MoodTheme {
+  // Mood Rating Card colors
+
+  static Map<String, Color> eventCardColors = {
+    "red": Color.fromRGBO(255, 138, 128, 1.0),
+    "purple": Colors.deepPurple,
+    "blue" : Colors.blue,
+    "yellow": Color.fromRGBO(255, 213, 79,1.0),
+//    "yellow": Color.fromRGBO(255, 202, 40,1.0),
+    "green": Color.fromRGBO(76, 175, 80,1.0)
+  };
+
   static final ThemeData LightMoodThemeData = ThemeData(
     // default brightness and colours
     buttonColor: Color.fromRGBO(245, 245, 245, 1),
@@ -17,14 +28,14 @@ class MoodTheme {
     appBarTheme: AppBarTheme(
         color: Colors.transparent,
         iconTheme: IconThemeData(
-          color:  Color.fromRGBO(84, 152, 245, 1.0),
+          color: Color.fromRGBO(84, 152, 245, 1.0),
         )),
     // Text themes
     textTheme: TextTheme(
       headline: TextStyle(
           fontSize: 35,
           fontFamily: "Basier",
-          color:  Color.fromRGBO(84, 152, 245, 1.0),
+          color: Color.fromRGBO(84, 152, 245, 1.0),
           fontWeight: FontWeight.w300),
       title: TextStyle(
           fontSize: 23, fontWeight: FontWeight.w300, color: Colors.black),

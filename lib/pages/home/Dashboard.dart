@@ -23,8 +23,8 @@ class _DashboardState extends State<Dashboard> {
   List<Widget> _buildTiles() {
     return <Widget>[
 //    PageTitle("MOOD"),
-      buildItemTitle("Overall"),
-      buildItemTitle("This Week"),
+      buildItemTitle("Upcoming Events"),
+      buildItemTitle("Today"),
       buildItemTitle("Next Event"),
       buildIconButton(Icons.accessibility_new, "test"),
       buildIconButton(Icons.calendar_today, "test"),

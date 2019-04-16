@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:mood_app/models/Event.dart';
 import 'package:intl/intl.dart';
-
+import "package:mood_app/ui/theme.dart";
 
 
 class EventCard extends StatelessWidget {
@@ -12,7 +12,7 @@ class EventCard extends StatelessWidget {
   _makeListTile(BuildContext context, Event event) {
 
     // get time as milliseconds from epoch
-    var dateTime = DateTime.fromMillisecondsSinceEpoch(event.time, isUtc: true);
+    var dateTime = event.getDateTime();
     // format date using en_GB Locale
     var dateFormat = DateFormat.Hm("en_GB ");
     var time = dateFormat.format(dateTime);
@@ -20,19 +20,19 @@ class EventCard extends StatelessWidget {
     Color tileColor;
     switch (event.rating) {
       case 1:
-        tileColor = Colors.red;
+        tileColor = MoodTheme.eventCardColors["red"];
         break;
       case 2:
-        tileColor = Colors.deepPurple;
+        tileColor = MoodTheme.eventCardColors["purple"];
         break;
       case 3:
-        tileColor = Colors.blue;
+        tileColor = MoodTheme.eventCardColors["blue"];
         break;
       case 4:
-        tileColor = Colors.yellow;
+        tileColor = MoodTheme.eventCardColors["yellow"];
         break;
       case 5:
-        tileColor = Colors.green;
+        tileColor = MoodTheme.eventCardColors["green"];
         break;
     }
 
