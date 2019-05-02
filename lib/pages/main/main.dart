@@ -91,7 +91,7 @@ class MainState extends State<Main> {
           ),
         ),
       ),
-      body: _pages[_currentIndex],
+      body:  _pages[_currentIndex],
       backgroundColor: Theme.of(context).canvasColor,
     );
   }

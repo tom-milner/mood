@@ -35,15 +35,8 @@ class DatabaseService {
   }
 
   void _onCreate(Database db, int version) async {
-//    await db.execute(DatabaseTableCreator.scenarios);
-    await db.execute("CREATE TABLE Scenarios ("
-        "scenarioId INTEGER PRIMARY_KEY,"
-        "title TEXT,"
-        "content TEXT,"
-        "icon TEXT,"
-    // Exercise IDs are stored in CSV format
-        "relevantExercises TEXT"
-        ")");
+    await db.execute(DatabaseTableCreator.scenarios);
+    await db.execute(DatabaseTableCreator.events);
   }
 
 

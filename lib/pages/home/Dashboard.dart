@@ -61,7 +61,6 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
 //        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 2.0),
         child: new StaggeredGridView.count(

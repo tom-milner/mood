@@ -4,7 +4,6 @@ class ExercisesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
       padding: EdgeInsets.all(10.0),
       child: new Column(
