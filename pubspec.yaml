@@ -21,6 +21,8 @@ dependencies:
   flutter_sparkline: any # sparkline - graph components
   flutter_staggered_grid_view: any # dashboard components
   intl: ^0.15.8 # localizations
+  flutter_fluid_slider : any # for ratings
+
 
 
 

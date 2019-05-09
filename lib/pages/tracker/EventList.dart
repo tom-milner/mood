@@ -21,9 +21,12 @@ class _eventListState extends State<EventList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250,
-     padding: EdgeInsets.all(10),
-      child: ListView.builder(
+      height: 210,
+     padding: EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 0),
+      child:
+
+
+      ListView.builder(
         scrollDirection: Axis.vertical,
         physics: AlwaysScrollableScrollPhysics(),
         shrinkWrap: true,

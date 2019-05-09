@@ -13,8 +13,24 @@ class EventService {
 
     // get whole events table
     var res = await db.query(tableName);
-    if(!res.isNotEmpty){
+    if(res.isNotEmpty){
       return res.map((event) => Event.fromMap(event)).toList();
+    }
+    return [];
+  }
+
+  // get events within bounds
+  getEventsAtTime(int earliestTime, int latestTime) async {
+    final db = await dbService.database;
+
+    // build query
+    // QUERY: SELECT * FROM Events WHERE millisFromEpoch <= latestTime AND millisFromEpoch >= earliestTime
+    String query = "SELECT * FROM '$tableName' WHERE millisFromEpoch <= $latestTime AND millisFromEpoch >= $earliestTime";
+
+    // Perform query
+    var res = await db.rawQuery(query);
+    if(res.isNotEmpty){
+      return  res.map((event) => Event.fromMap(event)).toList();
     }
     return [];
   }
@@ -25,13 +41,13 @@ class EventService {
     final db = await dbService.database;
 
     // get current max id, and add 1 to get next id
-    var maxIdTable = await db.rawQuery("SELECT MAX(eventId)+1 as eventId FROM Events");
+    var maxIdTable = await db.rawQuery("SELECT MAX(eventId)+1 as eventId FROM $tableName");
     int newId = maxIdTable.first["id"]; // id will be first entry in table
 
     // execute insert
     var raw = await db.rawInsert(
       "INSERT into Events (eventid, title, notes, rating, millisFromEpoch)"
-      "VALUES (?,?,?,?)",
+      "VALUES (?,?,?,?,?)",
       [newId, newEvent.title, newEvent.notes, newEvent.rating, newEvent.millisFromEpoch]
     );
 
