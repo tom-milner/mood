@@ -51,6 +51,8 @@ flutter:
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 
+
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
 
@@ -73,21 +75,21 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+
+
+  fonts:
+    - family: Raleway
+      fonts:
+        - asset: fonts/Raleway/Raleway-Regular.ttf
+        - asset: fonts/Raleway/Raleway-Bold.ttf
+        - asset: fonts/Raleway/Raleway-Thin.ttf
+          style: normal
+    - family: Muli
+      fonts:
+        - asset: fonts/Muli/Muli-Regular.ttf
+        - asset: fonts/Muli/Muli-Bold.ttf
+        - asset: fonts/Muli/Muli-Light.ttf
+          style: normal
   #
-
-
-fonts:
-  - family: Raleway
-    fonts:
-      - asset: fonts/Raleway-Regular.ttf
-      - asset: fonts/Raleway-Thin.ttf
-        style: normal
-  - fonts:
-      - family: Muli
-        fonts:
-          - asset: fonts/muli/Muli-Regular.ttf
-          - asset: fonts/muli/Muli-Thin.ttf
-            style: normal
-
   # For details regarding fonts from package dependencies,
-  # see https://flutter.io/custom-fonts/#from-packages
+  # see https://flutter.io/custom-fonts/#from-packages#from-packages

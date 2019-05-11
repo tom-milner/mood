@@ -1,69 +1,104 @@
 import "package:flutter/material.dart";
 import 'package:mood_app/models/Event.dart';
 import 'package:intl/intl.dart';
+import 'package:mood_app/pages/tracker/NewEventPage/NewEventPage.dart';
+import 'package:mood_app/pages/tracker/ViewEventPage/ViewEventPage.dart';
 import "package:mood_app/ui/theme.dart";
-
+import 'package:mood_app/widgets/MoodCard.dart';
 
 class EventCard extends StatelessWidget {
   final Event event;
-  static const Radius BORDER_RADIUS = Radius.circular(12);
+  Color tileColor;
+  IconData tileIcon;
+  static const Radius BORDER_RADIUS = Radius.circular(10);
   EventCard(this.event);
 
   _makeListTile(BuildContext context, Event event) {
-
-    // get time as milliseconds from epoch
-    var dateTime = event.getDateTime();
-    // format date using en_GB Locale
-    var dateFormat = DateFormat.Hm("en_GB ");
-    var time = dateFormat.format(dateTime);
-
-    Color tileColor;
     switch (event.rating) {
       case 1:
         tileColor = MoodTheme.eventCardColors["red"];
+        tileIcon = Icons.sentiment_very_dissatisfied;
         break;
       case 2:
         tileColor = MoodTheme.eventCardColors["purple"];
+        tileIcon = Icons.sentiment_dissatisfied;
         break;
       case 3:
         tileColor = MoodTheme.eventCardColors["blue"];
+        tileIcon = Icons.sentiment_neutral;
         break;
       case 4:
         tileColor = MoodTheme.eventCardColors["yellow"];
+        tileIcon = Icons.sentiment_satisfied;
+
         break;
       case 5:
         tileColor = MoodTheme.eventCardColors["green"];
+        tileIcon = Icons.sentiment_very_satisfied;
+
         break;
     }
 
     return Container(
-      height: 60,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(BORDER_RADIUS), color: tileColor),
-      alignment: Alignment.center,
-      key: ValueKey(event.title),
-      child: ListTile(
-        leading: Text(
-          // TODO: transform time into readable format
-          time,
-          style: Theme.of(context).textTheme.title,
+        height: 350,
+        padding: EdgeInsets.all(30),
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(color: tileColor, width: 10),
+          ),
         ),
-        title: Text(
-          event.title,
-          style: Theme.of(context).textTheme.display1,
-        ),
-      ),
-    );
+        key: ValueKey(event.title),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Icon(
+                  tileIcon,
+                  size: 60,
+                  color: tileColor,
+                ),
+                Container(
+                  width: 40,
+                  child: Text(
+                    event.getShortDateTime(),
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context)
+                        .textTheme
+                        .display1
+                        .copyWith(color: tileColor),
+                  ),
+                ),
+              ],
+            ),
+            Container(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  event.title,
+                  textAlign: TextAlign.left,
+                  style: Theme.of(context).textTheme.headline.copyWith(
+                      color: tileColor,
+                      fontSize: 60,
+                      fontWeight: FontWeight.w100),
+                ))
+          ],
+        ));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(BORDER_RADIUS),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) =>
+                    ViewEventPage(event, tileColor, tileIcon)));
+      },
+      child: MoodCard(
+        child: _makeListTile(context, event),
       ),
-      elevation: 2.0,
-      child: _makeListTile(context, event),
     );
   }
 }

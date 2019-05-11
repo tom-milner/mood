@@ -84,7 +84,7 @@ class MainState extends State<Main> {
                 icon: Icon(Icons.calendar_today),
                 color: Theme.of(context).iconTheme.color,
                 onPressed: () {
-                  changePage(3, "Calendar");
+                  changePage(3, "Journal");
                 },
               )
             ],

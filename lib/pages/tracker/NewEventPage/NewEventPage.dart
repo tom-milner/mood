@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:flutter/services.dart';
 import 'package:mood_app/widgets/MoodCard.dart';
 import "package:flutter_fluid_slider/flutter_fluid_slider.dart";
 import "package:mood_app/models/Event.dart";
@@ -19,34 +20,29 @@ class _NewEventPageState extends State<NewEventPage> {
 
   bool isComplete = false;
 
-
-  createNewEvent() {
+  createNewEvent() async {
     if (eventTitle == "" || eventNotes == "" || !isComplete) {
       return;
     } else {
       int eventTime = DateTime.now().millisecondsSinceEpoch;
       int eventRating = sliderValue.floor();
-      print("creating new event");
       Event newEvent = Event(eventTitle, eventNotes, eventRating, eventTime);
 
-      eventBloc.createNewEvent(newEvent);
+      await eventBloc.createNewEvent(newEvent);
       Navigator.of(context).pop();
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
-
-
-
-
-
     final _titleInput = MoodCard(
       child: Container(
         height: 70,
         alignment: Alignment.center,
         child: TextField(
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(20),
+          ],
           onChanged: (title) => (eventTitle = title),
           style: Theme.of(context)
               .textTheme
@@ -75,9 +71,9 @@ class _NewEventPageState extends State<NewEventPage> {
           onChanged: (notes) {
             eventNotes = notes;
             isComplete = true;
-            },
+          },
           keyboardType: TextInputType.multiline,
-          maxLines: 9,
+          maxLines: 20,
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: "Notes",
@@ -121,14 +117,14 @@ class _NewEventPageState extends State<NewEventPage> {
     final _submitButton = RaisedButton(
       color: Theme.of(context).primaryColor,
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      onPressed: (){
-        if(isComplete) createNewEvent();
+      onPressed: () async {
+        if (isComplete) await createNewEvent();
         return null;
       },
 //    onPressed: (){print("hgello");},
 
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10))),
+          borderRadius: BorderRadius.all(Radius.circular(5))),
       child: Container(
           alignment: Alignment.center,
           height: 30,
@@ -146,7 +142,7 @@ class _NewEventPageState extends State<NewEventPage> {
       resizeToAvoidBottomPadding: false,
       backgroundColor: Theme.of(context).canvasColor,
       appBar: new AppBar(
-        title: Text("Add New Event"),
+        title: Text("Add New Entry"),
         textTheme: Theme.of(context).textTheme,
         elevation: 0,
       ),

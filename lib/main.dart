@@ -10,15 +10,15 @@ void main() =>
     initializeDateFormatting("en_GB", null).then((_) => runApp(MyApp()));
 
 class MyApp extends StatelessWidget {
-  bool isDarkTheme = false;
   @override
   Widget build(BuildContext context) {
     return new DynamicTheme(
         // TODO: Use brightness to determine theme
-        data: (brightness) => MoodTheme.LightMoodThemeData.copyWith(),
+        data: (brightness) => MoodTheme.LightMoodThemeData,
         themedWidgetBuilder: (context, theme) {
           return new MaterialApp(
             debugShowCheckedModeBanner: false,
+
             title: "Mood",
             theme: theme,
             home: Main(),

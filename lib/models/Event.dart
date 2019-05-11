@@ -1,3 +1,5 @@
+import "package:intl/intl.dart";
+
 class Event {
   final String title;
   final String notes;
@@ -21,7 +23,13 @@ class Event {
 
   getDateTime() {
     return
-        DateTime.fromMillisecondsSinceEpoch(millisFromEpoch, isUtc: true);
+        DateTime.fromMillisecondsSinceEpoch(millisFromEpoch, isUtc: false);
+  }
+
+  getShortDateTime(){
+    var dateTime = DateTime.fromMillisecondsSinceEpoch(millisFromEpoch, isUtc: true);
+    String formattedTime = DateFormat.yMMMd("en_GB").format(dateTime);
+    return formattedTime;
   }
 
 

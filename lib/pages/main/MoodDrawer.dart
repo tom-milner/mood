@@ -20,7 +20,6 @@ class _MoodDrawerState extends State<MoodDrawer> {
 
     void changeColor() {
       setState(() {
-        print(widget.darkThemeActive);
         if (widget.darkThemeActive) {
           DynamicTheme.of(context).setThemeData(MoodTheme.DarkMoodThemeData);
         } else {
