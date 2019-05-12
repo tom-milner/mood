@@ -38,7 +38,6 @@ class MoodTheme {
     textTheme: TextTheme(
       headline: TextStyle(
           fontSize: 35,
-          fontFamily: "Muli",
           color: Color.fromRGBO(84, 152, 245, 1.0),
           fontWeight: FontWeight.w300),
       title: TextStyle(

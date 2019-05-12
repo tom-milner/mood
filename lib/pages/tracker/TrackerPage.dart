@@ -20,62 +20,70 @@ class _trackerPageState extends State<TrackerPage> {
       onRefresh: () async {
         eventBloc.getAllEvents();
       },
-      child: SingleChildScrollView(
-        physics: AlwaysScrollableScrollPhysics(),
+      child: ListView(
         padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          children: <Widget>[
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => NewEventPage()));
-              },
-              child: MoodCard(
-                color: Theme.of(context).primaryColor,
-                child: Container(
-                    padding: EdgeInsets.all(15),
-                    height: 80,
-                    alignment: Alignment.center,
-                    child: Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.brush,
-                          color: Theme.of(context).canvasColor,
-                          size: 35,
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 35),
-                          child: Text(
-                            "Add a new entry",
-                            style: Theme.of(context)
-                                .textTheme
-                                .title
-                                .copyWith(color: Theme.of(context).canvasColor),
-                          ),
-                        ),
-                      ],
-                    )),
-              ),
-            ),
-            StreamBuilder(
-              stream: eventBloc.events,
-              builder: (BuildContext context, AsyncSnapshot eventSnapshot) {
-                if (!eventSnapshot.hasData) {
-                  return Container(
-                    height: 100,
-                    alignment: Alignment.center,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        Theme.of(context).primaryColor,
+        children: <Widget>[
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => NewEventPage()));
+            },
+            child: MoodCard(
+              color: Theme.of(context).primaryColor,
+              child: Container(
+                  padding: EdgeInsets.all(15),
+                  height: 80,
+                  alignment: Alignment.center,
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.brush,
+                        color: Theme.of(context).canvasColor,
+                        size: 35,
                       ),
+                      Container(
+                        margin: EdgeInsets.only(left: 35),
+                        child: Text(
+                          "Add a new entry",
+                          style: Theme.of(context)
+                              .textTheme
+                              .title
+                              .copyWith(color: Theme.of(context).canvasColor),
+                        ),
+                      ),
+                    ],
+                  )),
+            ),
+          ),
+          StreamBuilder(
+            stream: eventBloc.events,
+            builder: (BuildContext context, AsyncSnapshot eventSnapshot) {
+              if (!eventSnapshot.hasData) {
+                return Container(
+                  height: 100,
+                  alignment: Alignment.center,
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      Theme.of(context).primaryColor,
                     ),
-                  );
-                }
+                  ),
+                );
+              }
 
+              if (eventSnapshot.data.length <= 0 ) {
+                return Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.only(top:200),
+                  child: Text("No Entries!",
+                  style: Theme.of(context).textTheme.headline.copyWith(
+                    color: Colors.grey
+                  ))
+                );
+              } else {
                 return ListView.builder(
-                  reverse: true,
+                    reverse: true,
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     padding: EdgeInsets.symmetric(vertical: 20),
@@ -84,11 +92,11 @@ class _trackerPageState extends State<TrackerPage> {
                       Event event = eventSnapshot.data[index];
                       return EventCard(event);
                     });
-              },
-              // TODO: implement seperated List of events (calendar)
-            )
-          ],
-        ),
+              }
+            },
+            // TODO: implement seperated List of events (calendar)
+          )
+        ],
       ),
     );
   }

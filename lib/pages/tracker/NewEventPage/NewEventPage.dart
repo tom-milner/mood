@@ -40,6 +40,7 @@ class _NewEventPageState extends State<NewEventPage> {
         height: 70,
         alignment: Alignment.center,
         child: TextField(
+          autocorrect: true,
           inputFormatters: [
             LengthLimitingTextInputFormatter(20),
           ],
@@ -68,12 +69,14 @@ class _NewEventPageState extends State<NewEventPage> {
         height: 350,
         padding: EdgeInsets.symmetric(vertical: 2, horizontal: 10),
         child: TextField(
+
+          autocorrect: true,
           onChanged: (notes) {
             eventNotes = notes;
             isComplete = true;
           },
           keyboardType: TextInputType.multiline,
-          maxLines: 20,
+          maxLines: 10,
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: "Notes",

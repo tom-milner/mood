@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:mood_app/pages/tracker/NewEventPage/NewEventPage.dart';
 import 'package:mood_app/pages/tracker/ViewEventPage/ViewEventPage.dart';
 import "package:mood_app/ui/theme.dart";
+import 'package:mood_app/utils/Utils.dart';
 import 'package:mood_app/widgets/MoodCard.dart';
 
 class EventCard extends StatelessWidget {
@@ -13,7 +14,7 @@ class EventCard extends StatelessWidget {
   static const Radius BORDER_RADIUS = Radius.circular(10);
   EventCard(this.event);
 
-  _makeListTile(BuildContext context, Event event) {
+  _makeEventCard(BuildContext context, Event event) {
     switch (event.rating) {
       case 1:
         tileColor = MoodTheme.eventCardColors["red"];
@@ -39,55 +40,6 @@ class EventCard extends StatelessWidget {
         break;
     }
 
-    return Container(
-        height: 350,
-        padding: EdgeInsets.all(30),
-        decoration: BoxDecoration(
-          border: Border(
-            top: BorderSide(color: tileColor, width: 10),
-          ),
-        ),
-        key: ValueKey(event.title),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Icon(
-                  tileIcon,
-                  size: 60,
-                  color: tileColor,
-                ),
-                Container(
-                  width: 40,
-                  child: Text(
-                    event.getShortDateTime(),
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context)
-                        .textTheme
-                        .display1
-                        .copyWith(color: tileColor),
-                  ),
-                ),
-              ],
-            ),
-            Container(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  event.title,
-                  textAlign: TextAlign.left,
-                  style: Theme.of(context).textTheme.headline.copyWith(
-                      color: tileColor,
-                      fontSize: 60,
-                      fontWeight: FontWeight.w100),
-                ))
-          ],
-        ));
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -97,8 +49,60 @@ class EventCard extends StatelessWidget {
                     ViewEventPage(event, tileColor, tileIcon)));
       },
       child: MoodCard(
-        child: _makeListTile(context, event),
+        color: Utils.darkenColor(tileColor),
+        child: Container(
+            height: 350,
+            padding: EdgeInsets.all(30),
+//            decoration: BoxDecoration(
+//              border: Border(
+//                top: BorderSide(color: tileColor, width: 10),
+//              ),
+//            ),
+            key: ValueKey(event.title),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Icon(
+                      tileIcon,
+                      size: 60,
+                      color: tileColor,
+                    ),
+                    Container(
+                      width: 40,
+                      child: Text(
+                        event.getShortDateTime(),
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.display1.copyWith(
+                              color: tileColor,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                    width: 400,
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      event.title,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.left,
+                      style: Theme.of(context).textTheme.headline.copyWith(
+                          color: tileColor,
+                          fontSize: 60,
+                          fontWeight: FontWeight.w100),
+                    ))
+              ],
+            )),
       ),
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _makeEventCard(context, event);
   }
 }

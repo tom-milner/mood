@@ -20,7 +20,7 @@ class _MoodCardState extends State<MoodCard> {
     }
 
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10 )),
       clipBehavior: Clip.antiAlias,
       color: cardColor,
       elevation: 2.0,
