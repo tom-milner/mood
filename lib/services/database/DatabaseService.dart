@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:mood_app/models/Category.dart';
 import 'package:mood_app/models/Scenario.dart';
+import 'package:mood_app/services/database/DatabaseSeeder.dart';
 import 'package:mood_app/services/database/DatabaseTableCreator.dart';
 import "package:path/path.dart";
 import "package:sqflite/sqflite.dart";
@@ -41,7 +42,7 @@ class DatabaseService {
     await db.execute(DatabaseTableCreator.category);
     await db.execute(DatabaseTableCreator.scenario);
     await db.execute(DatabaseTableCreator.event);
-    await seedDb(db);
+    await DatabaseSeeder.seedDb(db);
   }
 
   Future closeDb() async {
@@ -49,38 +50,6 @@ class DatabaseService {
     return dbClient.close();
   }
 
-  seedDb(Database db) async {
-    for (var cat in DummyData.dummyCategories) {
-      await db.insert("Category", cat.toMap());
-    }
-    var scenarios = DummyData.dummyScenarios;
-    var res = await db.query("Category");
-    var categories = res.map((category) => Category.fromMap(category)).toList();
-    // assign category to scenario
-    for (Scenario scen in scenarios) {
-      scen.categoryId = categories[0].id;
-      await db.insert("Scenario", scen.toMap());
-    }
-  }
 }
 
-// testing data
-class DummyData {
-  static List<Category> dummyCategories = [
-    Category(title: "School", color: "Green")
-  ];
-  static List<Scenario> dummyScenarios = [
-    Scenario(
-      title: "Exams",
-      content: "cdfdlv",
-    ),
-    Scenario(
-      title: "Friends",
-      content: "cdfdlv",
-    ),
-    Scenario(
-      title: "Homework",
-      content: "cdfdlv",
-    ),
-  ];
-}
+

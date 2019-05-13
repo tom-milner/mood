@@ -1,3 +1,4 @@
+import 'package:mood_app/models/Category.dart';
 import "package:mood_app/models/Scenario.dart";
 import "package:mood_app/services/database/DatabaseService.dart";
 
@@ -19,7 +20,7 @@ class ScenarioService {
     return [];
   }
 
-  Future<List<Scenario>> getScenariosOfCategory() async {
+  Future<List<Scenario>> getScenariosOfCategory(Category category) async {
     final db = await dbService.database;
   }
 

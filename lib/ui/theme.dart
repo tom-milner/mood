@@ -5,11 +5,15 @@ class MoodTheme {
 
   static final Map<String, Color> eventCardColors = {
     "red": Colors.red[500],
-    "purple": Colors.purple,
+    "purple": Colors.purple[300],
     "blue" : Colors.blue,
     "yellow": Colors.yellow,
     "green": Colors.green
   };
+
+//  static final Map<String, Color> categoryCardColors = {
+//    ""
+//  };
 
 
   static final ThemeData LightMoodThemeData = ThemeData(

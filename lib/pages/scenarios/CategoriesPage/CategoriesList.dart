@@ -1,39 +1,37 @@
 import "package:flutter/material.dart";
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:mood_app/models/Scenario.dart';
-import 'package:mood_app/pages/scenarios/AllScenariosPage/ScenarioCard.dart';
-import "package:mood_app/blocs/ScenarioBloc.dart";
+import 'package:mood_app/models/Category.dart';
+import 'package:mood_app/pages/scenarios/CategoriesPage/CategoryCard.dart';
+import "package:mood_app/blocs/CategoryBloc.dart";
 
 // class to display scenarios
-class ScenariosList extends StatefulWidget {
-  _ScenariosListState createState() => _ScenariosListState();
+class CategoriesList extends StatefulWidget {
+  _CategoriesListState createState() => _CategoriesListState();
 }
 
-class _ScenariosListState extends State<ScenariosList> {
-  final scenarioBloc = ScenarioBloc();
+class _CategoriesListState extends State<CategoriesList> {
+  final _categoryBloc = CategoryBloc();
 
-  Widget _buildScenarioList(BuildContext context) {
+  Widget _buildCategoryList(BuildContext context) {
           return StreamBuilder(
-              stream: scenarioBloc.scenarios,
-              builder: (BuildContext context, AsyncSnapshot scenariosSnapshot) {
+              stream: _categoryBloc.categories,
+              builder: (BuildContext context, AsyncSnapshot categorySnapshot) {
                 print("building");
-                if (!scenariosSnapshot.hasData) {
+                if (!categorySnapshot.hasData) {
                   return Container(
                     alignment: Alignment.center,
                     child: CircularProgressIndicator(),
                   );
                 }
-                print("Scenarios Snapshot: ${scenariosSnapshot.toString()}");
-
                 // GRID IMPLEMENTATION
                 return StaggeredGridView.countBuilder(
                   physics: NeverScrollableScrollPhysics(),
                   crossAxisCount: 8,
                   shrinkWrap: true,
-                  itemCount: scenariosSnapshot.data.length,
+                  itemCount: categorySnapshot.data.length,
                   itemBuilder: (BuildContext context, int index) {
-                    Scenario scenario = scenariosSnapshot.data[index];
-                    return ScenarioCard(scenario);
+                    Category category = categorySnapshot.data[index];
+                    return CategoryCard(category);
                   },
                   staggeredTileBuilder: (int index) {
                     return StaggeredTile.count(4, 3);
@@ -46,12 +44,12 @@ class _ScenariosListState extends State<ScenariosList> {
 
   @override
   Widget build(BuildContext context) {
-    return _buildScenarioList(context);
+    return _buildCategoryList(context);
   }
 
   @override
   void dispose() {
-    scenarioBloc.dispose();
+    _categoryBloc.dispose();
     super.dispose();
   }
 }

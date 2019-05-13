@@ -1,10 +1,9 @@
 import 'dart:math';
 
 import "package:flutter/material.dart";
-import "package:mood_app/models/Scenario.dart";
+import "package:mood_app/models/Category.dart";
 import 'package:mood_app/utils/Utils.dart';
 import "package:mood_app/widgets/MoodCard.dart";
-import "package:mood_app/pages/scenarios/ScenarioCategoryPage/ViewScenarioCategoryPage.dart";
 
 // DUMMY DATA FOR TESTING
 
@@ -23,22 +22,22 @@ class DummyData {
   }
 }
 
-class ScenarioCard extends StatelessWidget {
-  final Scenario scenario;
-  ScenarioCard(this.scenario);
+class CategoryCard extends StatelessWidget {
+  final Category category;
+  CategoryCard(this.category);
 
   final Color tileColor = DummyData().getRandomColor();
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:()=>{
-        Navigator.of(context).push(
-            MaterialPageRoute(
-            builder: (BuildContext context)=>
-              ViewScenariosCategoryPage()
-            ))
-      },
+//      onTap:()=>{
+//        Navigator.of(context).push(
+//            MaterialPageRoute(
+//            builder: (BuildContext context)=>
+//
+//            ))
+//      },
       child: Container(
         child: MoodCard(
           child: Container(
@@ -51,7 +50,7 @@ class ScenarioCard extends StatelessWidget {
             alignment: Alignment.bottomLeft,
             child: FittedBox(
               child: Text(
-                scenario.title,
+                category.title,
                 style: Theme.of(context)
                     .textTheme
                     .headline

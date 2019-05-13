@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mood_app/pages/journal/JournalPage.dart';
 import "package:mood_app/ui/theme.dart";
 import "package:mood_app/pages/exercises/exercises.dart";
-import "package:mood_app/pages/scenarios/AllScenariosPage/ScenariosPage.dart";
+import "package:mood_app/pages/scenarios/CategoriesPage/CategoriesPage.dart";
 import "package:mood_app/pages/home/Dashboard.dart";
 import "package:mood_app/pages/main/MoodDrawer.dart";
 
@@ -29,7 +29,7 @@ class MainState extends State<Main> {
 
   final List<Widget> _pages = [
     Dashboard(),
-    ScenariosPage(),
+    CategoriesPage(),
     ExercisesPage(),
     JournalPage(),
   ];
@@ -70,7 +70,7 @@ class MainState extends State<Main> {
                 icon: Icon(Icons.library_books),
                 color: Theme.of(context).iconTheme.color,
                 onPressed: () {
-                  changePage(1, "Scenarios");
+                  changePage(1, "Tips");
                 },
               ),
               IconButton(
