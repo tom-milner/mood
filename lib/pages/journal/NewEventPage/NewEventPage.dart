@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:mood_app/widgets/MoodCard.dart';
 import "package:flutter_fluid_slider/flutter_fluid_slider.dart";
 import "package:mood_app/models/Event.dart";
-import "package:mood_app/blocs/EventsBloc.dart";
+import "package:mood_app/blocs/EventBloc.dart";
 
 class NewEventPage extends StatefulWidget {
   _NewEventPageState createState() => _NewEventPageState();
@@ -26,7 +26,7 @@ class _NewEventPageState extends State<NewEventPage> {
     } else {
       int eventTime = DateTime.now().millisecondsSinceEpoch;
       int eventRating = sliderValue.floor();
-      Event newEvent = Event(eventTitle, eventNotes, eventRating, eventTime);
+      Event newEvent = Event(title: eventTitle, rating: eventRating,millisFromEpoch: eventTime,notes: eventNotes);
 
       await eventBloc.createNewEvent(newEvent);
       Navigator.of(context).pop();

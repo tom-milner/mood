@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:mood_app/blocs/EventsBloc.dart';
+import 'package:mood_app/blocs/EventBloc.dart';
 import 'package:mood_app/models/Event.dart';
-import 'package:mood_app/pages/tracker/EventCard.dart';
-import 'package:mood_app/pages/tracker/EventList.dart';
-import 'package:mood_app/pages/tracker/NewEventPage/NewEventPage.dart';
+import 'package:mood_app/pages/journal/EventCard.dart';
+import 'package:mood_app/pages/journal/NewEventPage/NewEventPage.dart';
 import "package:mood_app/widgets/MoodCard.dart";
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-class TrackerPage extends StatefulWidget {
-  _trackerPageState createState() => _trackerPageState();
+class JournalPage extends StatefulWidget {
+  _journalPageState createState() => _journalPageState();
 }
 
-class _trackerPageState extends State<TrackerPage> {
+class _journalPageState extends State<JournalPage> {
   final eventBloc = EventBloc();
+
+  @override
+  void dispose() {
+    eventBloc.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,15 +76,15 @@ class _trackerPageState extends State<TrackerPage> {
                 );
               }
 
-              if (eventSnapshot.data.length <= 0 ) {
+              if (eventSnapshot.data.length <= 0) {
                 return Container(
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.only(top:200),
-                  child: Text("No Entries!",
-                  style: Theme.of(context).textTheme.headline.copyWith(
-                    color: Colors.grey
-                  ))
-                );
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.only(top: 200),
+                    child: Text("No Entries!",
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline
+                            .copyWith(color: Colors.grey)));
               } else {
                 return ListView.builder(
                     reverse: true,

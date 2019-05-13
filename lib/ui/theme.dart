@@ -3,8 +3,8 @@ import "package:flutter/material.dart";
 class MoodTheme {
   // Mood Rating Card colors
 
-  static Map<String, Color> eventCardColors = {
-    "red": Colors.red,
+  static final Map<String, Color> eventCardColors = {
+    "red": Colors.red[500],
     "purple": Colors.purple,
     "blue" : Colors.blue,
     "yellow": Colors.yellow,

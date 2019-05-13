@@ -12,6 +12,10 @@ class EventBloc {
     getAllEvents();
   }
 
+  dispose(){
+    _eventController.close();
+  }
+
   // return all of the events
   getAllEvents() async {
     _eventController.sink.add(await _eventService.getAllEvents());

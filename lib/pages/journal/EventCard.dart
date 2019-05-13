@@ -1,8 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:mood_app/models/Event.dart';
-import 'package:intl/intl.dart';
-import 'package:mood_app/pages/tracker/NewEventPage/NewEventPage.dart';
-import 'package:mood_app/pages/tracker/ViewEventPage/ViewEventPage.dart';
+import 'package:mood_app/pages/journal/ViewEventPage/ViewEventPage.dart';
 import "package:mood_app/ui/theme.dart";
 import 'package:mood_app/utils/Utils.dart';
 import 'package:mood_app/widgets/MoodCard.dart';
@@ -11,7 +9,6 @@ class EventCard extends StatelessWidget {
   final Event event;
   Color tileColor;
   IconData tileIcon;
-  static const Radius BORDER_RADIUS = Radius.circular(10);
   EventCard(this.event);
 
   _makeEventCard(BuildContext context, Event event) {
@@ -39,6 +36,7 @@ class EventCard extends StatelessWidget {
 
         break;
     }
+    Color darkColor = Utils.darkenColor(tileColor);
 
     return GestureDetector(
       onTap: () {
@@ -49,15 +47,20 @@ class EventCard extends StatelessWidget {
                     ViewEventPage(event, tileColor, tileIcon)));
       },
       child: MoodCard(
-        color: Utils.darkenColor(tileColor),
         child: Container(
             height: 350,
             padding: EdgeInsets.all(30),
-//            decoration: BoxDecoration(
+            decoration: BoxDecoration(
+
 //              border: Border(
-//                top: BorderSide(color: tileColor, width: 10),
+//                top: BorderSide(color: tileColor, width: 10)
 //              ),
-//            ),
+
+                gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    stops: [.7, 1],
+                    colors: [darkColor, Utils.darkenColor(darkColor)])),
             key: ValueKey(event.title),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

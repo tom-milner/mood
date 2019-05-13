@@ -1,9 +1,9 @@
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:mood_app/pages/journal/JournalPage.dart';
 import "package:mood_app/ui/theme.dart";
 import "package:mood_app/pages/exercises/exercises.dart";
 import "package:mood_app/pages/scenarios/AllScenariosPage/ScenariosPage.dart";
-import "package:mood_app/pages/tracker/TrackerPage.dart";
 import "package:mood_app/pages/home/Dashboard.dart";
 import "package:mood_app/pages/main/MoodDrawer.dart";
 
@@ -31,7 +31,7 @@ class MainState extends State<Main> {
     Dashboard(),
     ScenariosPage(),
     ExercisesPage(),
-    TrackerPage(),
+    JournalPage(),
   ];
 
   @override

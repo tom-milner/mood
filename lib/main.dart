@@ -2,7 +2,6 @@ import "package:flutter/material.dart";
 import 'package:mood_app/ui/theme.dart';
 import "package:mood_app/pages/main/main.dart";
 import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 // set local to en_UK

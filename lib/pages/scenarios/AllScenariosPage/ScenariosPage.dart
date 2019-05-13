@@ -14,38 +14,50 @@ class _ScenariosPageState extends State<ScenariosPage> {
   Widget build(BuildContext context) {
     return Container(
 //      padding: EdgeInsets.symmetric(vertical: 10.0),
-      child: new SingleChildScrollView(
-//          mainAxisAlignment: MainAxisAlignment.center,
-
-        child: Column(children: <Widget>[
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              SearchBar(),
-              PopupMenuButton<String>(
-                padding: EdgeInsets.all(0),
-                tooltip: "Sort",
-                child: Icon(
-                  Icons.arrow_drop_down,
-                  size: 40,
-                  color: Theme.of(context).primaryColor,
+      child: ListView(
+          children: <Widget>[
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+              child: Text(
+                "Choose from a category below:",
+                style: Theme.of(context).textTheme.title.copyWith(
+                  fontWeight: FontWeight.w300,
+                      fontSize: 30
                 ),
-                itemBuilder: (BuildContext context) {
-                  return <PopupMenuEntry<String>>[
-                    const PopupMenuItem(
-                      child: Text("Mental"),
-                      value: "GoodBye",
-                    ),
-                  ];
-                },
-              )
-            ],
-          ),
-          ScenariosList()
-        ]),
-      ),
+              ),
+            ),
+
+            //        Row(
+//          mainAxisSize: MainAxisSize.max,
+//          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//          crossAxisAlignment: CrossAxisAlignment.center,
+//          children: <Widget>[
+//            SearchBar(),
+//            PopupMenuButton<String>(
+//              padding: EdgeInsets.all(0),
+//              tooltip: "Sort",
+//              child: Icon(
+//                Icons.arrow_drop_down,
+//                size: 40,
+//                color: Theme.of(context).primaryColor,
+//              ),
+//              itemBuilder: (BuildContext context) {
+//                return <PopupMenuEntry<String>>[
+//                  const PopupMenuItem(
+//                    child: Text("Mental"),
+//                    value: "GoodBye",
+//                  ),
+//                ];
+//              },
+//            )
+//          ],
+//        ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 5),
+              child: ScenariosList(),
+            ),
+          ]),
     );
   }
 }

@@ -1,7 +1,5 @@
 import "package:flutter/material.dart";
 import "package:mood_app/widgets/MoodCard.dart";
-import 'package:mood_app/widgets/PageTitle.dart';
-import 'package:mood_app/ui/theme.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class Dashboard extends StatefulWidget {

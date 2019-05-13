@@ -1,80 +1,66 @@
-import 'package:dynamic_theme/dynamic_theme.dart';
+import 'dart:math';
+
 import "package:flutter/material.dart";
-import "package:mood_app/ui/theme.dart";
-import "package:mood_app/pages/scenarios/ScenarioPage/ScenarioPage.dart";
 import "package:mood_app/models/Scenario.dart";
+import 'package:mood_app/utils/Utils.dart';
+import "package:mood_app/widgets/MoodCard.dart";
+import "package:mood_app/pages/scenarios/ScenarioCategoryPage/ViewScenarioCategoryPage.dart";
 
-// card content model
-//class MoodCardContent {
-//  final String title;
-//  final IconData icon;
-//  MoodCardContent(this.title, this.icon);
-//}
-//
+// DUMMY DATA FOR TESTING
 
-class ScenarioCard extends StatefulWidget {
+class DummyData {
+  static final dummyColors = [
+    Colors.red[300],
+    Colors.blue[300],
+    Colors.green[300],
+    Colors.purple[300]
+  ];
+
+  var random = new Random();
+
+  getRandomColor() {
+    return dummyColors[random.nextInt(4)];
+  }
+}
+
+class ScenarioCard extends StatelessWidget {
   final Scenario scenario;
   ScenarioCard(this.scenario);
 
-//
-//  static final MoodCardContent content = MoodCardContent(title, icon);
-//
-
-  _ScenarioCardState createState() => _ScenarioCardState();
-}
-
-class _ScenarioCardState extends State<ScenarioCard> {
-
-
+  final Color tileColor = DummyData().getRandomColor();
 
   @override
   Widget build(BuildContext context) {
-
-    print(widget.scenario);
-
-
-
-    return Card(
-      elevation: 2.0,
-
-      margin: EdgeInsets.symmetric(vertical: 6.0, horizontal: 5.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5.0),
-      ),
+    return GestureDetector(
+      onTap:()=>{
+        Navigator.of(context).push(
+            MaterialPageRoute(
+            builder: (BuildContext context)=>
+              ViewScenariosCategoryPage()
+            ))
+      },
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10),
-        decoration: BoxDecoration(
-          color: Theme.of(context).buttonColor,
-          borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
+        child: MoodCard(
+          child: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [tileColor, Utils.darkenColor(tileColor)])),
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+            alignment: Alignment.bottomLeft,
+            child: FittedBox(
+              child: Text(
+                scenario.title,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline
+                    .copyWith(color: Colors.white),
+              ),
+            ),
+          ),
         ),
-        child: _makeListTile(widget.scenario),
       ),
     );
-  }
-
-// helper methods
-  Widget _makeListTile(scenario) {
-    return Container(
-      alignment: Alignment.center,
-      key: ValueKey(scenario.title),
-//      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Container(
-        child: ListTile(
-          onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ScenarioPage(scenario: scenario,))),
-
-          title: new Text(
-          scenario.title,
-          style: Theme.of(context).textTheme.title,
-        ),
-
-        trailing: Icon(
-          Icons.keyboard_arrow_right,
-          color: Theme.of(context).iconTheme.color,
-          size: 40.0,
-        ),
-      ),
-        ),
-      );
-
   }
 }

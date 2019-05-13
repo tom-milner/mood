@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import 'package:mood_app/blocs/FilterScenariosBloc.dart';
 
 class SearchBar extends StatefulWidget {
   _SearchBarState createState() => _SearchBarState();
@@ -9,16 +8,11 @@ class SearchBar extends StatefulWidget {
 
 class _SearchBarState extends State<SearchBar>{
 
-  FilterScenariosBloc _filterScenariosBloc = FilterScenariosBloc();
 
 
 
   @override
   Widget build(BuildContext context) {
-    // function to filter the scenarios depending ton the users input.
-    void filterSearchResults(String query) {
-       _filterScenariosBloc.doFilter(query);
-    }
 
     return Container(
       width: 280,
@@ -28,7 +22,6 @@ class _SearchBarState extends State<SearchBar>{
         height: 40,
         child: TextField(
 
-          onChanged: (query) => filterSearchResults(query),
           cursorWidth: 1.5,
           style: Theme.of(context).textTheme.body1,
           decoration: InputDecoration(

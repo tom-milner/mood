@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 import "package:mood_app/models/Scenario.dart";
-import "package:mood_app/ui/theme.dart";
 
 class ScenarioAppBar extends StatelessWidget implements PreferredSizeWidget{
   final Scenario scenario;
