@@ -20,7 +20,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
               child: Text(
-                "What can we help with?",
+                "What can I help with?",
                 style: Theme.of(context).textTheme.title.copyWith(
                   fontWeight: FontWeight.w300,
                       fontSize: 30

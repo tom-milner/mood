@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:mood_app/models/Category.dart';
-import 'package:mood_app/models/Scenario.dart';
 import 'package:mood_app/services/database/DatabaseSeeder.dart';
 import 'package:mood_app/services/database/DatabaseTableCreator.dart';
 import "package:path/path.dart";

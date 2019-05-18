@@ -14,10 +14,7 @@ class DatabaseSeeder {
     Category(title: "Friends", color: "Green"),
     Category(title: "Relationships", color: "Green"),
     Category(title: "Work", color: "Green"),
-    Category(title: "Work", color: "Green"),
-    Category(title: "Work", color: "Green"),
-    Category(title: "Work", color: "Green"),
-    Category(title: "Work", color: "Green"),
+    Category(title: "Stress", color: "Green"),
   ];
   static List<Scenario> dummyScenarios = [
     Scenario(
@@ -57,7 +54,7 @@ class DatabaseSeeder {
     // assign random category to scenario
     var random = Random();
     for (Scenario scen in scenarios) {
-      scen.categoryId = categories[random.nextInt(scenarios.length)].id;
+      scen.categoryId = categories[random.nextInt(scenarios.length-1)].id;
       await db.insert("Scenario", scen.toMap());
     }
   }

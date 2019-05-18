@@ -2,6 +2,8 @@ import 'dart:math';
 
 import "package:flutter/material.dart";
 import "package:mood_app/models/Category.dart";
+import 'package:mood_app/pages/scenarios/ScenariosPage/ViewScenariosPage.dart';
+import 'package:mood_app/services/ScenarioService.dart';
 import 'package:mood_app/utils/Utils.dart';
 import "package:mood_app/widgets/MoodCard.dart";
 
@@ -28,16 +30,24 @@ class CategoryCard extends StatelessWidget {
 
   final Color tileColor = DummyData().getRandomColor();
 
+  ScenarioService scenarioService = new ScenarioService();
+
+  getScenarios() async {
+    return await scenarioService.getScenariosOfCategory(category);
+  }
+
   @override
   Widget build(BuildContext context) {
+    print(category.id);
+    
     return GestureDetector(
-//      onTap:()=>{
-//        Navigator.of(context).push(
-//            MaterialPageRoute(
-//            builder: (BuildContext context)=>
-//
-//            ))
-//      },
+      onTap: () async {
+        var scenarios = await getScenarios();
+        return Navigator.of(context)
+            .push(MaterialPageRoute(builder: (BuildContext context) {
+              return ViewScenariosPage(scenarios: scenarios);
+        }));
+      },
       child: Container(
         child: MoodCard(
           child: Container(

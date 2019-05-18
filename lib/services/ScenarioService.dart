@@ -21,7 +21,11 @@ class ScenarioService {
   }
 
   Future<List<Scenario>> getScenariosOfCategory(Category category) async {
+    print(category.id);
     final db = await dbService.database;
+    var query = "SELECT * FROM $tableName WHERE categoryId = ${category.id}";
+    var res = await db.rawQuery(query);
+    return res.map((scenario)=>Scenario.fromMap(scenario)).toList();
   }
 
 }

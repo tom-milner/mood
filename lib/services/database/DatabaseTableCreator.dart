@@ -1,33 +1,32 @@
-
 // class to hold database table creation statements.
 
 class DatabaseTableCreator {
-  static const String scenario = (
-      "CREATE TABLE Scenario ("
+  static const String scenario = ("CREATE TABLE Scenario ("
       "scenarioId INTEGER PRIMARY KEY NOT NULL ,"
-      "title TEXT,"
-      "content TEXT,"
+      "title TEXT NOT NULL,"
+      "content TEXT NOT NULL,"
       "icon TEXT,"
-  "categoryId INTEGER,"
-      // Exercise IDs are stored in CSV format
-      "relevantExercises TEXT"
+      "relevantExercises TEXT,"
+      "categoryId INTEGER,"
+      "FOREIGN KEY (categoryId) REFERENCES Category(categoryId)"
       ")");
 
-  static const String event = (
-    "CREATE TABLE Event ("
+  static const String event = ("CREATE TABLE Event ("
       "eventId INTEGER PRIMARY KEY NOT NULL,"
-      "title TEXT,"
+      "title TEXT NOT NULL,"
       "notes TEXT,"
-      "rating INTEGER,"
-      "millisFromEpoch INTEGER"
-      ")"
-  );
+      "rating INTEGER NOT NULL,"
+      "millisFromEpoch INTEGER NOT NULL"
+      ")");
 
-  static const String category =(
-    "CREATE TABLE Category ("
+  static const String category = ("CREATE TABLE Category ("
       "categoryId INTEGER PRIMARY KEY NOT NULL,"
-      "title TEXT,"
+      "title TEXT NOT NULL,"
       "color TEXT"
-      ")"
-  );
+      ")");
+
+  static const String exercise = ("CREATE TABLE Exercise ("
+      "exerciseId INTEGER PRIMARY KEY NOT NULL,"
+      "contentType TEXT NOT NULL,"
+      ")");
 }

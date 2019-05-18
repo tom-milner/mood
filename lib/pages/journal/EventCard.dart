@@ -87,7 +87,7 @@ class EventCard extends StatelessWidget {
                   ],
                 ),
                 Container(
-                    width: 400,
+                    width: 700,
                     alignment: Alignment.centerLeft,
                     child: Text(
                       event.title,

@@ -5,7 +5,7 @@ import "package:mood_app/pages/scenarios/ScenarioPage/ScenarioBody.dart";
 
 class ScenarioPage extends StatelessWidget {
   final Scenario scenario;
-  ScenarioPage({Key key, this.scenario}) : super(key: key);
+  ScenarioPage(scenarios, {Key key, this.scenario}) : super(key: key);
 
 
   @override
