@@ -1,33 +1,39 @@
 import "dart:async";
+import 'package:mood_app/models/Category.dart';
 import "package:mood_app/services/ScenarioService.dart";
 import 'package:mood_app/models/Scenario.dart';
 
-
 class ScenarioBloc {
 
-  // broadcast - stream can have multiple listeners
-  final _scenarioController = StreamController<List<Scenario>>.broadcast();
   final _scenarioService = ScenarioService();
+
+
+  // broadcast - stream can have multiple listeners
+  final _scenarioController = StreamController<List<Scenario>>();
   get scenarios => _scenarioController.stream;
+
+  // for filtered scenarios
+  final _filteredScenarioController = StreamController<List<Scenario>>.broadcast();
+  get filteredScenarios => _filteredScenarioController.stream;
 
   ScenarioBloc() {
     getAllScenarios();
   }
 
-  dispose(){
+  dispose() {
     // close stream when not in use to save resources
     _scenarioController.close();
+    _filteredScenarioController.close();
   }
 
-
+// get scenarios of category
+  getScenariosOfCategory(Category category) async {
+    _filteredScenarioController.sink
+        .add(await _scenarioService.getScenariosOfCategory(category));
+  }
 
 // get all the scenarios
- getAllScenarios() async {
+  getAllScenarios() async {
     _scenarioController.sink.add(await _scenarioService.getAllScenarios());
   }
-
-
-
-
-
 }

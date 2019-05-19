@@ -5,6 +5,7 @@ class DatabaseTableCreator {
       "scenarioId INTEGER PRIMARY KEY NOT NULL ,"
       "title TEXT NOT NULL,"
       "content TEXT NOT NULL,"
+      "description TEXT NOT NULL,"
       "icon TEXT,"
       "relevantExercises TEXT,"
       "categoryId INTEGER,"

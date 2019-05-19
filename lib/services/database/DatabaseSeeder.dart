@@ -18,29 +18,29 @@ class DatabaseSeeder {
   ];
   static List<Scenario> dummyScenarios = [
     Scenario(
-      title: "Exams",
-      content: "cdfdlv",
-    ),
+        title: "Struggling With Exams huh uh uh uh ?",
+        content: "cdfdlv",
+        description: "Here are some tips to get you through exams!."),
     Scenario(
-      title: "Friends",
-      content: "cdfdlv",
-    ),
+        title: "Feeliong yeety",
+        content: "cdfdlv",
+        description: "Here are some tips to get you through exams!."),
     Scenario(
-      title: "Homework",
-      content: "cdfdlv",
-    ),
+        title: "Whoop diddly do",
+        content: "cdfdlv",
+        description: "Here are some tips to get you through exams!."),
     Scenario(
-      title: "Homework",
-      content: "cdfdlv",
-    ),
+        title: "Life feeling shite?",
+        content: "cdfdlv",
+        description: "Here are some tips to get you through exams!."),
     Scenario(
-      title: "Homework",
-      content: "cdfdlv",
-    ),
+        title: "Struggling With Exams huh uh uh uh ?",
+        content: "cdfdlv",
+        description: "Here are some tips to get you through exams!."),
     Scenario(
-      title: "Homework",
-      content: "cdfdlv",
-    ),
+        title: "Struggling With Exams huh uh uh uh ?",
+        content: "cdfdlv",
+        description: "Here are some tips to get you through exams!."),
   ];
 
   static seedDb(Database db) async {
@@ -54,7 +54,7 @@ class DatabaseSeeder {
     // assign random category to scenario
     var random = Random();
     for (Scenario scen in scenarios) {
-      scen.categoryId = categories[random.nextInt(scenarios.length-1)].id;
+      scen.categoryId = categories[random.nextInt(scenarios.length - 1)].id;
       await db.insert("Scenario", scen.toMap());
     }
   }

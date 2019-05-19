@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:mood_app/utils/Utils.dart';
 
 class MoodTheme {
   // Mood Rating Card colors
@@ -71,9 +72,9 @@ class MoodTheme {
     textSelectionColor: Color.fromRGBO(100, 100, 100, 1.0),
 //      brightness: Brightness.dark,
     // Icon Themes
-    iconTheme: IconThemeData(
-      color: Colors.white,
-    ),
+//    iconTheme: IconThemeData(
+//      color: Colors.white,
+//    ),
 
     appBarTheme: AppBarTheme(
         color: Colors.transparent,

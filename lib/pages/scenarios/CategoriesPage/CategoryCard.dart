@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import "package:flutter/material.dart";
+import 'package:mood_app/blocs/ScenarioBloc.dart';
 import "package:mood_app/models/Category.dart";
 import 'package:mood_app/pages/scenarios/ScenariosPage/ViewScenariosPage.dart';
 import 'package:mood_app/services/ScenarioService.dart';
@@ -38,14 +39,12 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(category.id);
-    
+
     return GestureDetector(
-      onTap: () async {
-        var scenarios = await getScenarios();
+      onTap: () {
         return Navigator.of(context)
             .push(MaterialPageRoute(builder: (BuildContext context) {
-              return ViewScenariosPage(scenarios: scenarios);
+              return ViewScenariosPage(category);
         }));
       },
       child: Container(

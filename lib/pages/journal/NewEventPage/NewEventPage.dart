@@ -4,12 +4,31 @@ import 'package:mood_app/widgets/MoodCard.dart';
 import "package:flutter_fluid_slider/flutter_fluid_slider.dart";
 import "package:mood_app/models/Event.dart";
 import "package:mood_app/blocs/EventBloc.dart";
+import 'package:zefyr/zefyr.dart';
+
 
 class NewEventPage extends StatefulWidget {
   _NewEventPageState createState() => _NewEventPageState();
 }
 
 class _NewEventPageState extends State<NewEventPage> {
+
+  ZefyrController _zefyrController;
+  FocusNode _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    // Create an empty document or load existing if you have one.
+    // Here we create an empty document:
+    final document = new NotusDocument();
+    _zefyrController = new ZefyrController(document);
+    _focusNode = new FocusNode();
+  }
+
+
+
+
   final eventBloc = EventBloc();
 
   // must be state variable so it can set state
@@ -63,6 +82,10 @@ class _NewEventPageState extends State<NewEventPage> {
         ),
       ),
     );
+
+    // using zefyr editor
+
+
 
     final _notesInput = MoodCard(
       child: Container(
