@@ -22,9 +22,9 @@ dependencies:
   flutter_staggered_grid_view: any # dashboard components
   intl: ^0.15.8 # localizations
   flutter_fluid_slider : any # for ratings
-  zefyr: any # fancy text editing
 
-
+#  TODO: fix zefyr package
+#  zefyr: 0.5.0 # fancy text editing
 
 
   # The following adds the Cupertino Icons font to your application.

@@ -12,7 +12,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new DynamicTheme(
-        // TODO: Use brightness to determine theme
         data: (brightness) => MoodTheme.LightMoodThemeData,
         themedWidgetBuilder: (context, theme) {
           return new MaterialApp(

@@ -1,34 +1,16 @@
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
+//import 'package:mood_app/pages/journal/NewEventPage/ZefyrEditor.dart';
 import 'package:mood_app/widgets/MoodCard.dart';
 import "package:flutter_fluid_slider/flutter_fluid_slider.dart";
 import "package:mood_app/models/Event.dart";
 import "package:mood_app/blocs/EventBloc.dart";
-import 'package:zefyr/zefyr.dart';
-
 
 class NewEventPage extends StatefulWidget {
   _NewEventPageState createState() => _NewEventPageState();
 }
 
 class _NewEventPageState extends State<NewEventPage> {
-
-  ZefyrController _zefyrController;
-  FocusNode _focusNode;
-
-  @override
-  void initState() {
-    super.initState();
-    // Create an empty document or load existing if you have one.
-    // Here we create an empty document:
-    final document = new NotusDocument();
-    _zefyrController = new ZefyrController(document);
-    _focusNode = new FocusNode();
-  }
-
-
-
-
   final eventBloc = EventBloc();
 
   // must be state variable so it can set state
@@ -45,7 +27,11 @@ class _NewEventPageState extends State<NewEventPage> {
     } else {
       int eventTime = DateTime.now().millisecondsSinceEpoch;
       int eventRating = sliderValue.floor();
-      Event newEvent = Event(title: eventTitle, rating: eventRating,millisFromEpoch: eventTime,notes: eventNotes);
+      Event newEvent = Event(
+          title: eventTitle,
+          rating: eventRating,
+          millisFromEpoch: eventTime,
+          notes: eventNotes);
 
       await eventBloc.createNewEvent(newEvent);
       Navigator.of(context).pop();
@@ -83,16 +69,11 @@ class _NewEventPageState extends State<NewEventPage> {
       ),
     );
 
-    // using zefyr editor
-
-
-
     final _notesInput = MoodCard(
       child: Container(
         height: 350,
         padding: EdgeInsets.symmetric(vertical: 2, horizontal: 10),
         child: TextField(
-
           autocorrect: true,
           onChanged: (notes) {
             eventNotes = notes;
@@ -168,22 +149,31 @@ class _NewEventPageState extends State<NewEventPage> {
       resizeToAvoidBottomPadding: false,
       backgroundColor: Theme.of(context).canvasColor,
       appBar: new AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.description),
+            color: Theme.of(context).primaryColor,
+            onPressed: (){
+//              return Navigator.of(context).push(
+//                  MaterialPageRoute(builder: (BuildContext context){
+//                    return ZefyrEditor();
+//                  })
+//              );
+            },
+          )
+        ],
         title: Text("Add New Entry"),
         textTheme: Theme.of(context).textTheme,
         elevation: 0,
       ),
-      body: SingleChildScrollView(
-        child: new Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: <Widget>[
-              _titleInput,
-              _notesInput,
-              ratingInput,
-              _submitButton
-            ],
-          ),
-        ),
+      body: ListView(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        children: <Widget>[
+          _titleInput,
+          _notesInput,
+          ratingInput,
+          _submitButton
+        ],
       ),
     );
   }
