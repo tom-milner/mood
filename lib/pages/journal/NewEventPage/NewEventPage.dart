@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
-//import 'package:mood_app/pages/journal/NewEventPage/ZefyrEditor.dart';
+import 'package:mood_app/pages/journal/NewEventPage/ZefyrEditor.dart';
 import 'package:mood_app/widgets/MoodCard.dart';
 import "package:flutter_fluid_slider/flutter_fluid_slider.dart";
 import "package:mood_app/models/Event.dart";
@@ -154,11 +154,12 @@ class _NewEventPageState extends State<NewEventPage> {
             icon: Icon(Icons.description),
             color: Theme.of(context).primaryColor,
             onPressed: (){
-//              return Navigator.of(context).push(
-//                  MaterialPageRoute(builder: (BuildContext context){
-//                    return ZefyrEditor();
-//                  })
-//              );
+              print("navigating to zefyr");
+              return Navigator.of(context).push(
+                  MaterialPageRoute(builder: (BuildContext context){
+                    return ZefyrEditor();
+                  })
+              );
             },
           )
         ],

@@ -23,8 +23,7 @@ dependencies:
   intl: ^0.15.8 # localizations
   flutter_fluid_slider : any # for ratings
 
-#  TODO: fix zefyr package
-#  zefyr: 0.5.0 # fancy text editing
+  zefyr: 0.5.0 # fancy text editing
 
 
   # The following adds the Cupertino Icons font to your application.
