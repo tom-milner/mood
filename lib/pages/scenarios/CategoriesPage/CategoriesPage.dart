@@ -7,9 +7,6 @@ class CategoriesPage extends StatefulWidget {
 }
 
 class _CategoriesPageState extends State<CategoriesPage> {
-  String dropdownValue = "Hello";
-  String filterTerm = "";
-
   @override
   Widget build(BuildContext context) {
     return Container(

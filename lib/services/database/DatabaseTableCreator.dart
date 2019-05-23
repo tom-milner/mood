@@ -7,7 +7,7 @@ class DatabaseTableCreator {
       "content TEXT NOT NULL,"
       "description TEXT NOT NULL,"
       "icon TEXT,"
-      "relevantExercises TEXT,"
+      "isFavourite INTEGER DEFAULT 0 NOT NULL,"
       "categoryId INTEGER,"
       "FOREIGN KEY (categoryId) REFERENCES Category(categoryId)"
       ")");
@@ -26,8 +26,4 @@ class DatabaseTableCreator {
       "color TEXT"
       ")");
 
-  static const String exercise = ("CREATE TABLE Exercise ("
-      "exerciseId INTEGER PRIMARY KEY NOT NULL,"
-      "contentType TEXT NOT NULL,"
-      ")");
 }

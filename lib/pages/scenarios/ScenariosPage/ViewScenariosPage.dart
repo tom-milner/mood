@@ -8,20 +8,24 @@ import 'package:mood_app/widgets/MoodCard.dart';
 class ViewScenariosPage extends StatelessWidget {
 //  final List<Scenario> scenarios;
   final Category category;
-  ViewScenariosPage(this.category);
+  final bool isFavouritesPage;
+  ViewScenariosPage({this.category, this.isFavouritesPage = false});
 
   @override
   Widget build(BuildContext context) {
     var scenarioBloc = ScenarioBloc();
-    scenarioBloc.getScenariosOfCategory(category);
-
+    if(isFavouritesPage){
+      scenarioBloc.getFavouriteScenarios();
+    } else {
+      scenarioBloc.getScenariosOfCategory(category);
+    }
     return Scaffold(
       backgroundColor: Theme.of(context).canvasColor,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Theme.of(context).canvasColor,
         title: Text(
-          category.title,
+          isFavouritesPage ? "Favourites": category.title,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.title.copyWith(
                 fontWeight: FontWeight.w300,
@@ -40,6 +44,7 @@ class ViewScenariosPage extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             }
+
 
             if (snapshot.data.length <= 0) {
               return Container(

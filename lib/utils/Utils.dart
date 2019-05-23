@@ -36,4 +36,15 @@ class Utils {
         Color.fromRGBO(newWeights[0], newWeights[1], newWeights[2], .5);
     return newColor;
   }
+
+  static bool boolFromInt(int boolInt) {
+    bool flag = (boolInt==1)?true: false;
+    return flag;
+  }
+
+
+  static int intFromBool(bool inputBool) {
+    int outputInt = inputBool ? 1 : 0;
+    return outputInt;
+  }
 }

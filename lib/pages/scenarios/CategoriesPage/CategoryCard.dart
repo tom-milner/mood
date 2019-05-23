@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import "package:flutter/material.dart";
-import 'package:mood_app/blocs/ScenarioBloc.dart';
 import "package:mood_app/models/Category.dart";
 import 'package:mood_app/pages/scenarios/ScenariosPage/ViewScenariosPage.dart';
 import 'package:mood_app/services/ScenarioService.dart';
@@ -44,7 +43,7 @@ class CategoryCard extends StatelessWidget {
       onTap: () {
         return Navigator.of(context)
             .push(MaterialPageRoute(builder: (BuildContext context) {
-              return ViewScenariosPage(category);
+              return ViewScenariosPage(category: category);
         }));
       },
       child: Container(

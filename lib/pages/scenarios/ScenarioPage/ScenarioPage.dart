@@ -1,31 +1,45 @@
 import "package:flutter/material.dart";
 import "package:mood_app/models/Scenario.dart";
+import 'package:mood_app/utils/Utils.dart';
+import "package:mood_app/services/ScenarioService.dart";
+import 'package:mood_app/widgets/MoodCard.dart';
 
-class ScenarioPage extends StatelessWidget {
+class ScenarioPage extends StatefulWidget {
   final Scenario scenario;
   ScenarioPage(this.scenario);
 
+  _ScenarioPageState createState() => _ScenarioPageState();
+}
+
+class _ScenarioPageState extends State<ScenarioPage> {
+  ScenarioService _scenarioService = ScenarioService();
+  bool isFavourite;
   bool hasLongTitle = false;
   TextSpan titleSpan = TextSpan();
 
   @override
+  void initState() {
+    isFavourite = widget.scenario.isFavourite;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     titleSpan = new TextSpan(
-      text: scenario.title,
+      text: widget.scenario.title,
       style: Theme.of(context).textTheme.title,
     );
 
-   // for determining title size
+    // for determining title size
     var titlePainter = new TextPainter(
       text: titleSpan,
       maxLines: 1,
       textAlign: TextAlign.start,
       textDirection: Directionality.of(context),
     );
-    titlePainter.layout(maxWidth: MediaQuery.of(context).size.width-160);
+    titlePainter.layout(maxWidth: MediaQuery.of(context).size.width - 160);
     // true if title will overflow screen (1 line)
     hasLongTitle = titlePainter.didExceedMaxLines;
-    print(hasLongTitle);
 
     return Scaffold(
         backgroundColor: Theme.of(context).canvasColor,
@@ -38,8 +52,17 @@ class ScenarioPage extends StatelessWidget {
                 backgroundColor: Theme.of(context).canvasColor,
                 actions: <Widget>[
                   IconButton(
-                    icon: Icon(Icons.favorite_border),
-                    onPressed: () {},
+                    icon: Icon(
+                        isFavourite ? Icons.favorite : Icons.favorite_border),
+                    color: Theme.of(context).primaryColor,
+                    onPressed: () async {
+                      await _scenarioService.toggleFavourite(widget.scenario);
+                      setState(() {
+                        isFavourite = !isFavourite;
+                        Scaffold.of(context)
+                            .showSnackBar(_buildSnackBarWidget(isFavourite));
+                      });
+                    },
                   ),
                 ],
                 pinned: true,
@@ -62,7 +85,7 @@ class ScenarioPage extends StatelessWidget {
                     );
                   }),
                   background: Container(
-                    color: Theme.of(context).primaryColor,
+                    color: Utils.lightenColor(Theme.of(context).primaryColor),
                   ),
                   collapseMode: CollapseMode.parallax,
                 ),
@@ -70,34 +93,65 @@ class ScenarioPage extends StatelessWidget {
             ];
           },
           body: Container(
-            child:ListView(
+            child: ListView(
               children: <Widget>[
-                _overviewWidget(context, scenario)
+                _buildTitleWidget(context, widget.scenario),
+                _buildContentWidget(context, widget.scenario)
               ],
             ),
           ),
         ));
   }
 
-
-  Widget _overviewWidget(BuildContext context, Scenario scenario){
+  Widget _buildTitleWidget(BuildContext context, Scenario scenario) {
     return new Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          hasLongTitle ? Container(
-              width: MediaQuery.of(context).size.width - 40,
-            child:  Text(
-              scenario.title,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 5,
+          hasLongTitle
+              ? Container(
+                  width: MediaQuery.of(context).size.width - 40,
+                  child: Text(scenario.title,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 5,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headline),
+                )
+              : Container(),
+          Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.symmetric(vertical: 20),
+            child: Text(
+              scenario.description,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.title.copyWith(
-                fontSize: 35
-              ),
+                  color: Utils.darkenColor(Theme.of(context).primaryColor)),
             ),
-          ) : Container(),
+          ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildContentWidget(BuildContext context, Scenario scenario) {
+    return new Container(
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      child: Text(
+        scenario.content,
+        style: Theme.of(context).textTheme.body1.copyWith(fontSize: 20),
+      ),
+    );
+  }
+
+  Widget _buildSnackBarWidget(bool isFavorite) {
+    return new SnackBar(
+      duration: Duration(seconds: 1),
+      backgroundColor: Theme.of(context).primaryColor,
+      content: Text(
+        isFavorite ? "Added to favourites" : "Removed from favourites",
+        style: Theme.of(context).textTheme.title.copyWith(
+          color: Colors.white
+        ),
       ),
     );
   }
