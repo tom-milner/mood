@@ -1,8 +1,11 @@
 import "package:flutter/material.dart";
 import 'package:mood_app/models/Event.dart';
 import 'package:mood_app/utils/Utils.dart';
+import 'package:mood_app/widgets/CustomImageDelegate.dart';
 import 'package:mood_app/widgets/MoodCard.dart';
 import 'package:mood_app/widgets/PageTitle.dart';
+import 'package:quill_delta/quill_delta.dart';
+import "package:zefyr/zefyr.dart";
 
 class ViewEventPage extends StatelessWidget {
   Event event;
@@ -11,8 +14,13 @@ class ViewEventPage extends StatelessWidget {
 
   ViewEventPage(this.event, this.eventColor, this.eventIcon);
 
+
   @override
   Widget build(BuildContext context) {
+
+
+  Delta notesDelta = event.getDelta();
+
     return Scaffold(
         backgroundColor: Theme.of(context).canvasColor,
         appBar: AppBar(
@@ -28,11 +36,6 @@ class ViewEventPage extends StatelessWidget {
           padding: EdgeInsets.all(10),
           children: <Widget>[
             Container(
-//              decoration: BoxDecoration(
-//                border: Border(
-//                  bottom: BorderSide(color: eventColor, width: 3),
-//                )
-//              ),
               alignment: Alignment.center,
               child: Text(
                 event.title,
@@ -91,7 +94,10 @@ class ViewEventPage extends StatelessWidget {
                         .title
                         .copyWith(color: Theme.of(context).primaryColor),
                   ),
-                  Text(event.notes)
+                  ZefyrView(
+                    document: NotusDocument.fromDelta(notesDelta),
+                    imageDelegate: CustomImageDelegate(),
+                  )
                 ],
               ),
             ),
@@ -99,3 +105,4 @@ class ViewEventPage extends StatelessWidget {
         ));
   }
 }
+

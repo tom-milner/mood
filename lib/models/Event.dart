@@ -1,28 +1,31 @@
+import 'dart:convert';
+
 import "package:intl/intl.dart";
+import 'package:quill_delta/quill_delta.dart';
 
 class Event {
   int id;
   String title;
-  String notes;
+  String notesDeltaString;
   int rating;
   int millisFromEpoch;
 
-  Event({this.title, this.notes, this.rating, this.millisFromEpoch});
+  Event({this.title,this.rating, this.millisFromEpoch});
 
   Event.fromMap(Map<String, dynamic> map)
       : assert(map["title"] != null),
-        assert(map["notes"] != null),
+        assert(map["notesDeltaString"] != null),
         assert(map["rating"] != null),
         assert(map["millisFromEpoch"] != null),
         title = map["title"],
-        notes = map["notes"],
+        notesDeltaString = map["notesDeltaString"],
         rating = map["rating"],
         millisFromEpoch = map["millisFromEpoch"];
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
       "title":title,
-      "notes":notes,
+      "notesDeltaString":notesDeltaString,
       "rating":rating,
       "millisFromEpoch":millisFromEpoch
     };
@@ -30,6 +33,14 @@ class Event {
       map["id"] = id;
     }
     return map;
+  }
+
+  Delta getDelta(){
+    return Delta.fromJson(json.decode(notesDeltaString) as List);
+  }
+
+   setNotesDeltaString(Delta delta){
+    notesDeltaString = json.encode(delta);
   }
 
   getDateTime() {

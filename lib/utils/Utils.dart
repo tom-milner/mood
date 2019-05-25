@@ -15,7 +15,7 @@ class Utils {
     }
 
     Color newColor =
-        Color.fromRGBO(newWeights[0], newWeights[1], newWeights[2], .9);
+        Color.fromRGBO(newWeights[0], newWeights[1], newWeights[2], 1);
     return newColor;
   }
 
@@ -33,7 +33,7 @@ class Utils {
     }
 
     Color newColor =
-        Color.fromRGBO(newWeights[0], newWeights[1], newWeights[2], .5);
+        Color.fromRGBO(newWeights[0], newWeights[1], newWeights[2], 1);
     return newColor;
   }
 

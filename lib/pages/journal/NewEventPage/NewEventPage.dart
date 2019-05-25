@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
 import 'package:mood_app/pages/journal/NewEventPage/ZefyrEditorPage.dart';
+import 'package:mood_app/utils/Utils.dart';
+import 'package:mood_app/widgets/CustomImageDelegate.dart';
 import 'package:mood_app/widgets/MoodCard.dart';
 import "package:flutter_fluid_slider/flutter_fluid_slider.dart";
 import "package:mood_app/models/Event.dart";
@@ -13,6 +16,8 @@ class NewEventPage extends StatefulWidget {
 
 class _NewEventPageState extends State<NewEventPage> {
   final eventBloc = EventBloc();
+
+  // create a new Document
   final ZefyrController _controller = ZefyrController(NotusDocument());
   final FocusNode _focusNode = new FocusNode();
 
@@ -20,21 +25,19 @@ class _NewEventPageState extends State<NewEventPage> {
   var ratingInput;
   double sliderValue = 3;
   String eventTitle;
-  String eventNotes;
-
-  bool isComplete = false;
 
   createNewEvent() async {
-    if (eventTitle == "" || eventNotes == "" || !isComplete) {
-      return;
-    } else {
+    if (eventTitle != null && eventTitle != "" && eventTitle.isNotEmpty) {
+
       int eventTime = DateTime.now().millisecondsSinceEpoch;
       int eventRating = sliderValue.floor();
       Event newEvent = Event(
-          title: eventTitle,
-          rating: eventRating,
-          millisFromEpoch: eventTime,
-          notes: eventNotes);
+        title: eventTitle,
+        rating: eventRating,
+        millisFromEpoch: eventTime,
+      );
+      newEvent.setNotesDeltaString(_controller.document.toDelta());
+      print(newEvent.notesDeltaString);
 
       await eventBloc.createNewEvent(newEvent);
       Navigator.of(context).pop();
@@ -73,48 +76,55 @@ class _NewEventPageState extends State<NewEventPage> {
     );
 
     final ZefyrThemeData _zefyrTheme = ZefyrThemeData(
-        toolbarTheme: ZefyrToolbarTheme.fallback(context)
-            .copyWith(color: Theme.of(context).primaryColor));
+      toolbarTheme: ZefyrToolbarTheme.fallback(context).copyWith(
+        color: Utils.lightenColor(Theme.of(context).primaryColor),
+        toggleColor: Utils.darkenColor(Theme.of(context).primaryColor),
+      ),
+      cursorColor: Theme.of(context).primaryColor,
+
+    );
 
     final _notesInput = MoodCard(
       child: Container(
 //        padding: EdgeInsets.all(10),
-        child: Stack(children: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-            child:
-          ZefyrTheme(
-            data: _zefyrTheme,
-            child: ZefyrField(
-              height: 300.0,
-              decoration: InputDecoration(
-                labelText: 'Notes',
-                border: InputBorder.none,
-                focusedBorder: null,
-                enabledBorder: null,
+        child: Stack(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              child: ZefyrTheme(
+                data: _zefyrTheme,
+                child: ZefyrField(
+                  height: 300.0,
+                  decoration: InputDecoration(
+                    labelText: 'Notes',
+                    border: InputBorder.none,
+                    focusedBorder: null,
+                    enabledBorder: null,
+                  ),
+                  controller: _controller,
+                  focusNode: _focusNode,
+                  autofocus: true,
+                  imageDelegate: new CustomImageDelegate(),
+                  physics: ClampingScrollPhysics(),
+                ),
               ),
-              controller: _controller,
-              focusNode: _focusNode,
-              autofocus: true,
-//          imageDelegate: new CustomImageDelegate(),
-              physics: ClampingScrollPhysics(),
-            ),),
-          ),
-          Positioned(
-              top: 0,
-              right: 0,
-              child: IconButton(
-                icon: Icon(Icons.fullscreen),
-                iconSize: 25,
-                color: Theme.of(context).primaryColor,
-                onPressed: () {
-                  return Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (BuildContext context) {
-                    return ZefyrEditorPage();
-                  }));
-                },
-              )),
-        ]),
+            ),
+            Positioned(
+                top: 0,
+                right: 0,
+                child: IconButton(
+                  icon: Icon(Icons.fullscreen),
+                  iconSize: 25,
+                  color: Theme.of(context).primaryColor,
+                  onPressed: () {
+                    return Navigator.of(context).push(
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return ZefyrEditorPage(_zefyrTheme, _controller.document);
+                    }));
+                  },
+                )),
+          ],
+        ),
       ),
     );
 
@@ -154,10 +164,8 @@ class _NewEventPageState extends State<NewEventPage> {
       color: Theme.of(context).primaryColor,
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       onPressed: () async {
-        if (isComplete) await createNewEvent();
-        return null;
+        await createNewEvent();
       },
-//    onPressed: (){print("hgello");},
 
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(5))),

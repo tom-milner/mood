@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:mood_app/utils/Utils.dart';
+import 'package:zefyr/zefyr.dart';
 
 class MoodTheme {
   // Mood Rating Card colors
@@ -15,6 +16,7 @@ class MoodTheme {
 //  static final Map<String, Color> categoryCardColors = {
 //    ""
 //  };
+
 
 
   static final ThemeData LightMoodThemeData = ThemeData(
@@ -39,8 +41,10 @@ class MoodTheme {
         iconTheme: IconThemeData(
           color: Color.fromRGBO(84, 152, 245, 1.0),
         )),
+
     // Text themes
     textTheme: TextTheme(
+
       headline: TextStyle(
           fontSize: 35,
           color: Color.fromRGBO(84, 152, 245, 1.0),

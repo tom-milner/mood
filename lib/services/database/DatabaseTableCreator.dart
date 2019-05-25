@@ -15,7 +15,7 @@ class DatabaseTableCreator {
   static const String event = ("CREATE TABLE Event ("
       "eventId INTEGER PRIMARY KEY NOT NULL,"
       "title TEXT NOT NULL,"
-      "notes TEXT,"
+      "notesDeltaString TEXT,"
       "rating INTEGER NOT NULL,"
       "millisFromEpoch INTEGER NOT NULL"
       ")");

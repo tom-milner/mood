@@ -22,7 +22,7 @@ dependencies:
   flutter_staggered_grid_view: any # dashboard components
   intl: ^0.15.8 # localizations
   flutter_fluid_slider : any # for ratings
-
+  image_picker: any
   zefyr: ^0.5.0 # fancy text editing
 
 

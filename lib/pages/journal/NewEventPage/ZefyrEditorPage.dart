@@ -2,6 +2,11 @@ import "package:flutter/material.dart";
 import "package:zefyr/zefyr.dart";
 
 class ZefyrEditorPage extends StatefulWidget {
+  ZefyrThemeData zefyrThemeData;
+  NotusDocument document;
+
+  ZefyrEditorPage(this.zefyrThemeData, this.document);
+
   @override
   _zefyrEditorPageState createState() => _zefyrEditorPageState();
 }
@@ -13,24 +18,13 @@ class _zefyrEditorPageState extends State<ZefyrEditorPage> {
   @override
   void initState() {
     super.initState();
-//     Create an empty document or load existing if you have one.
-//     Here we create an empty document:
-    final document = new NotusDocument();
-    _controller = new ZefyrController(document);
+    // load in existing document
+    _controller = new ZefyrController(widget.document);
     _focusNode = new FocusNode();
   }
 
   @override
   Widget build(BuildContext context) {
-
-   final zefyrTheme = ZefyrThemeData(
-     cursorColor: Theme.of(context).primaryColor,
-     toolbarTheme: ZefyrToolbarTheme.fallback(context).copyWith(
-
-     ),
-   );
-
-
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -41,13 +35,13 @@ class _zefyrEditorPageState extends State<ZefyrEditorPage> {
       ),
       body: ZefyrScaffold(
         child: ZefyrTheme(
-          data: zefyrTheme,
+          data: widget.zefyrThemeData,
           child: ZefyrEditor(
             controller: _controller,
             focusNode: _focusNode,
           ),
         ),
-          ),
+      ),
     );
   }
 }
