@@ -1,10 +1,11 @@
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
-import 'package:mood_app/pages/journal/NewEventPage/ZefyrEditor.dart';
+import 'package:mood_app/pages/journal/NewEventPage/ZefyrEditorPage.dart';
 import 'package:mood_app/widgets/MoodCard.dart';
 import "package:flutter_fluid_slider/flutter_fluid_slider.dart";
 import "package:mood_app/models/Event.dart";
 import "package:mood_app/blocs/EventBloc.dart";
+import 'package:zefyr/zefyr.dart';
 
 class NewEventPage extends StatefulWidget {
   _NewEventPageState createState() => _NewEventPageState();
@@ -12,6 +13,8 @@ class NewEventPage extends StatefulWidget {
 
 class _NewEventPageState extends State<NewEventPage> {
   final eventBloc = EventBloc();
+  final ZefyrController _controller = ZefyrController(NotusDocument());
+  final FocusNode _focusNode = new FocusNode();
 
   // must be state variable so it can set state
   var ratingInput;
@@ -69,23 +72,49 @@ class _NewEventPageState extends State<NewEventPage> {
       ),
     );
 
+    final ZefyrThemeData _zefyrTheme = ZefyrThemeData(
+        toolbarTheme: ZefyrToolbarTheme.fallback(context)
+            .copyWith(color: Theme.of(context).primaryColor));
+
     final _notesInput = MoodCard(
       child: Container(
-        height: 350,
-        padding: EdgeInsets.symmetric(vertical: 2, horizontal: 10),
-        child: TextField(
-          autocorrect: true,
-          onChanged: (notes) {
-            eventNotes = notes;
-            isComplete = true;
-          },
-          keyboardType: TextInputType.multiline,
-          maxLines: 10,
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: "Notes",
+//        padding: EdgeInsets.all(10),
+        child: Stack(children: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+            child:
+          ZefyrTheme(
+            data: _zefyrTheme,
+            child: ZefyrField(
+              height: 300.0,
+              decoration: InputDecoration(
+                labelText: 'Notes',
+                border: InputBorder.none,
+                focusedBorder: null,
+                enabledBorder: null,
+              ),
+              controller: _controller,
+              focusNode: _focusNode,
+              autofocus: true,
+//          imageDelegate: new CustomImageDelegate(),
+              physics: ClampingScrollPhysics(),
+            ),),
           ),
-        ),
+          Positioned(
+              top: 0,
+              right: 0,
+              child: IconButton(
+                icon: Icon(Icons.fullscreen),
+                iconSize: 25,
+                color: Theme.of(context).primaryColor,
+                onPressed: () {
+                  return Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (BuildContext context) {
+                    return ZefyrEditorPage();
+                  }));
+                },
+              )),
+        ]),
       ),
     );
 
@@ -146,35 +175,23 @@ class _NewEventPageState extends State<NewEventPage> {
     );
 
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomPadding: true,
       backgroundColor: Theme.of(context).canvasColor,
       appBar: new AppBar(
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.description),
-            color: Theme.of(context).primaryColor,
-            onPressed: (){
-              print("navigating to zefyr");
-              return Navigator.of(context).push(
-                  MaterialPageRoute(builder: (BuildContext context){
-                    return ZefyrEditor();
-                  })
-              );
-            },
-          )
-        ],
         title: Text("Add New Entry"),
         textTheme: Theme.of(context).textTheme,
         elevation: 0,
       ),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        children: <Widget>[
-          _titleInput,
-          _notesInput,
-          ratingInput,
-          _submitButton
-        ],
+      body: ZefyrScaffold(
+        child: ListView(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          children: <Widget>[
+            _titleInput,
+            _notesInput,
+            ratingInput,
+            _submitButton
+          ],
+        ),
       ),
     );
   }
