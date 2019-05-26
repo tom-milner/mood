@@ -1,26 +1,29 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:mood_app/utils/Utils.dart';
+import 'package:quill_delta/quill_delta.dart';
 
 class Scenario {
    int id;
    String title;
-   String content;
+   String contentDeltaString;
    String description;
    String icon;
    int categoryId;
    bool isFavourite;
 
-  Scenario({this.id, this.title, this.content,this.description, this.icon, this.categoryId, this.isFavourite});
+  Scenario({this.id, this.title, this.contentDeltaString, this.description, this.icon, this.categoryId, this.isFavourite});
 
   Scenario.fromMap(
     Map<String, dynamic> map,
   )   : assert(map["title"] != null),
-        assert(map["content"] != null),
+        assert(map["contentDeltaString"] != null),
         assert(map["description"] != null),
         id = map["scenarioId"],
         title = map["title"],
         description = map["description"],
-        content = map["content"],
+        contentDeltaString = map["contentDeltaString"],
         categoryId = map["categoryId"],
         isFavourite = Utils.boolFromInt(map["isFavourite"]),
         icon = map["icon"];
@@ -28,7 +31,7 @@ class Scenario {
   Map<String, dynamic> toMap(){
     var map = <String, dynamic>{
       "title":title,
-      "content":content,
+      "contentDeltaString":contentDeltaString,
       "description":description,
       "icon":icon,
       "categoryId":categoryId,
@@ -38,6 +41,15 @@ class Scenario {
       map["scenarioId"] = id;
     }
     return map;
+  }
+
+
+  Delta getContentDelta(){
+    return Delta.fromJson(json.decode(contentDeltaString) as List);
+  }
+
+  setContentDeltaString(Delta contentDelta){
+    contentDeltaString = json.encode(contentDelta);
   }
 
 

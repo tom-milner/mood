@@ -26,6 +26,7 @@ class _zefyrEditorPageState extends State<ZefyrEditorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).buttonColor,
       appBar: AppBar(
         elevation: 0,
         title: Text(

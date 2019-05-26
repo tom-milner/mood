@@ -4,7 +4,7 @@ class DatabaseTableCreator {
   static const String scenario = ("CREATE TABLE Scenario ("
       "scenarioId INTEGER PRIMARY KEY NOT NULL ,"
       "title TEXT NOT NULL,"
-      "content TEXT NOT NULL,"
+      "contentDeltaString TEXT NOT NULL,"
       "description TEXT NOT NULL,"
       "icon TEXT,"
       "isFavourite INTEGER DEFAULT 0 NOT NULL,"

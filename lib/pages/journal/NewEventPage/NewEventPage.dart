@@ -8,6 +8,7 @@ import 'package:mood_app/widgets/MoodCard.dart';
 import "package:flutter_fluid_slider/flutter_fluid_slider.dart";
 import "package:mood_app/models/Event.dart";
 import "package:mood_app/blocs/EventBloc.dart";
+import 'package:mood_app/widgets/MoodSnackBar.dart';
 import 'package:zefyr/zefyr.dart';
 
 class NewEventPage extends StatefulWidget {
@@ -37,9 +38,8 @@ class _NewEventPageState extends State<NewEventPage> {
         millisFromEpoch: eventTime,
       );
       newEvent.setNotesDeltaString(_controller.document.toDelta());
-      print(newEvent.notesDeltaString);
-
       await eventBloc.createNewEvent(newEvent);
+
       Navigator.of(context).pop();
     }
   }

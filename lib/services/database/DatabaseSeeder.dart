@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:mood_app/models/Category.dart';
 import 'package:mood_app/models/Scenario.dart';
+import 'package:quill_delta/quill_delta.dart';
 import 'package:sqflite/sqlite_api.dart';
 
 // ******************************************************
@@ -20,34 +22,33 @@ class DatabaseSeeder {
 
   static var lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
+
   static List<Scenario> dummyScenarios = [
     Scenario(
         title: "Struggling With Exams?",
-        content: lorem,
         description: "Here are some tips to get you through exams!."),
     Scenario(
         title: "Feeliong yeety",
-        content: "cdfdlv",
         description: "Here are some tips to get you through exams!."),
     Scenario(
         title: "Whoop diddly do",
-        content: lorem,
         description: "Here are some tips to get you through exams!."),
     Scenario(
         title: "Life feeling shite?",
-        content: lorem,
         description: "Here are some tips to get you through exams!."),
     Scenario(
         title: "Struggling With Exams huh uh uh uh ?",
-        content: lorem,
         description: "Here are some tips to get you through exams!."),
     Scenario(
         title: "Struggling With Exams huh uh uh uh ?",
-        content: lorem,
         description: "Here are some tips to get you through exams!."),
   ];
 
   static seedDb(Database db) async {
+
+    var delta = new Delta();
+    delta..insert(lorem)..insert('\n');
+
     for (var cat in dummyCategories) {
       await db.insert("Category", cat.toMap());
     }
@@ -60,6 +61,7 @@ class DatabaseSeeder {
     for (Scenario scen in scenarios) {
       scen.categoryId = categories[random.nextInt(scenarios.length - 1)].id;
       scen.isFavourite = false;
+      scen.setContentDeltaString(delta);
       await db.insert("Scenario", scen.toMap());
     }
   }

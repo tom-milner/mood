@@ -2,7 +2,10 @@ import "package:flutter/material.dart";
 import "package:mood_app/models/Scenario.dart";
 import 'package:mood_app/utils/Utils.dart';
 import "package:mood_app/services/ScenarioService.dart";
-import 'package:mood_app/widgets/MoodCard.dart';
+import 'package:mood_app/widgets/CustomImageDelegate.dart';
+import 'package:mood_app/widgets/MoodSnackBar.dart';
+import 'package:quill_delta/quill_delta.dart';
+import 'package:zefyr/zefyr.dart';
 
 class ScenarioPage extends StatefulWidget {
   final Scenario scenario;
@@ -59,8 +62,10 @@ class _ScenarioPageState extends State<ScenarioPage> {
                       await _scenarioService.toggleFavourite(widget.scenario);
                       setState(() {
                         isFavourite = !isFavourite;
-                        Scaffold.of(context)
-                            .showSnackBar(_buildSnackBarWidget(isFavourite));
+                        String snackbarMessage = isFavourite
+                            ? "Added to favourites."
+                            : "Removed from favourites.";
+                        MoodSnackBar().showSnackBar(context, snackbarMessage);
                       });
                     },
                   ),
@@ -134,25 +139,20 @@ class _ScenarioPageState extends State<ScenarioPage> {
   }
 
   Widget _buildContentWidget(BuildContext context, Scenario scenario) {
-    return new Container(
-      padding: EdgeInsets.symmetric(horizontal: 10),
-      child: Text(
-        scenario.content,
-        style: Theme.of(context).textTheme.body1.copyWith(fontSize: 20),
-      ),
-    );
-  }
+    print(scenario.getContentDelta());
+    try {
+      Delta contentDelta = scenario.getContentDelta();
 
-  Widget _buildSnackBarWidget(bool isFavorite) {
-    return new SnackBar(
-      duration: Duration(seconds: 1),
-      backgroundColor: Theme.of(context).primaryColor,
-      content: Text(
-        isFavorite ? "Added to favourites" : "Removed from favourites",
-        style: Theme.of(context).textTheme.title.copyWith(
-          color: Colors.white
+      return new Container(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        child: ZefyrView(
+          document: NotusDocument.fromDelta(contentDelta),
+          imageDelegate: CustomImageDelegate(),
         ),
-      ),
-    );
+      );
+    } catch (e) {
+      print(e);
+      return Container();
+    }
   }
 }
