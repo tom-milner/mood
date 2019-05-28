@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:mood_app/models/Event.dart';
+import 'package:mood_app/models/Event/Event.dart';
 import 'package:mood_app/pages/journal/ViewEventPage/ViewEventPage.dart';
 import "package:mood_app/ui/theme.dart";
 import 'package:mood_app/utils/Utils.dart';

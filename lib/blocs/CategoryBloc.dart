@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:mood_app/models/Category.dart';
-import 'package:mood_app/services/CategoryService/CategoryService.dart';
+import 'package:mood_app/services/ScenarioService/CategoryService.dart';
 
 class CategoryBloc {
   // broadcast - multiple listeners

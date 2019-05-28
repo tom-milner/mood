@@ -1,6 +1,7 @@
 import "dart:async";
-import "package:mood_app/services/EventService.dart";
-import "package:mood_app/models/Event.dart";
+import 'package:mood_app/models/Event/Tag.dart';
+import "package:mood_app/services/EventService/EventService.dart";
+import "package:mood_app/models/Event/Event.dart";
 
 class EventBloc {
   // set up controller and stream

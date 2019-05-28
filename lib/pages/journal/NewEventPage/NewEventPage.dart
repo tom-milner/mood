@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
+import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
+import 'package:mood_app/models/Event/Tag.dart';
 import 'package:mood_app/pages/journal/NewEventPage/ZefyrEditorPage.dart';
 import 'package:mood_app/utils/Utils.dart';
 import 'package:mood_app/widgets/CustomImageDelegate.dart';
 import 'package:mood_app/widgets/MoodCard.dart';
 import "package:flutter_fluid_slider/flutter_fluid_slider.dart";
-import "package:mood_app/models/Event.dart";
+import "package:mood_app/models/Event/Event.dart";
 import "package:mood_app/blocs/EventBloc.dart";
 import 'package:mood_app/widgets/MoodSnackBar.dart';
 import 'package:zefyr/zefyr.dart';
@@ -16,20 +18,34 @@ class NewEventPage extends StatefulWidget {
 }
 
 class _NewEventPageState extends State<NewEventPage> {
+
+
   final eventBloc = EventBloc();
 
   // create a new Document
   final ZefyrController _controller = ZefyrController(NotusDocument());
   final FocusNode _focusNode = new FocusNode();
 
+  // for alerting users
+  MoodSnackBar snackBar = new MoodSnackBar();
+  TextEditingController _textEditingController= new TextEditingController();
+
+
+  String _tagsInputValue;
+  bool _tagInputIsEmpty = true;
+
   // must be state variable so it can set state
-  var ratingInput;
   double sliderValue = 3;
   String eventTitle;
+  List<Tag> tags = <Tag>[];
+
+
+  void dispose(){
+    _textEditingController.dispose();
+  }
 
   createNewEvent() async {
     if (eventTitle != null && eventTitle != "" && eventTitle.isNotEmpty) {
-
       int eventTime = DateTime.now().millisecondsSinceEpoch;
       int eventRating = sliderValue.floor();
       Event newEvent = Event(
@@ -44,9 +60,10 @@ class _NewEventPageState extends State<NewEventPage> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final _titleInput = MoodCard(
+  Widget _buildTitleInput(
+    context,
+  ) {
+    return MoodCard(
       child: Container(
         height: 70,
         alignment: Alignment.center,
@@ -74,17 +91,22 @@ class _NewEventPageState extends State<NewEventPage> {
         ),
       ),
     );
+  }
 
-    final ZefyrThemeData _zefyrTheme = ZefyrThemeData(
+  ZefyrThemeData _buildZefyrTheme(context) {
+    return ZefyrThemeData(
       toolbarTheme: ZefyrToolbarTheme.fallback(context).copyWith(
         color: Utils.lightenColor(Theme.of(context).primaryColor),
         toggleColor: Utils.darkenColor(Theme.of(context).primaryColor),
       ),
       cursorColor: Theme.of(context).primaryColor,
-
     );
+  }
 
-    final _notesInput = MoodCard(
+  Widget _buildNotesInput(context) {
+    var _zefyrTheme = _buildZefyrTheme(context);
+
+    return MoodCard(
       child: Container(
 //        padding: EdgeInsets.all(10),
         child: Stack(
@@ -127,9 +149,112 @@ class _NewEventPageState extends State<NewEventPage> {
         ),
       ),
     );
+  }
 
-    // rating slider
-    ratingInput = Container(
+  Widget _buildTagBox(context, Tag tag) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(2),
+        color: Theme.of(context).primaryColor,
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2.5),
+      margin: EdgeInsets.only(right: 5),
+      alignment: Alignment.center,
+      child: Text(
+        tag.title,
+        style: Theme.of(context)
+            .textTheme
+            .body1
+            .copyWith(color: Theme.of(context).buttonColor),
+      ),
+    );
+  }
+
+  Widget _buildTagsContainer(
+    context,
+  ) {
+    return Container(
+      height: 50,
+      padding: EdgeInsets.all(10),
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
+        itemCount: tags.length,
+        itemBuilder: (BuildContext context, int index) {
+          if (tags.length == 0) return Container();
+          return _buildTagBox(context, tags[index]);
+        },
+      ),
+    );
+  }
+
+  Widget _buildTagsInput(context) {
+
+
+    return MoodCard(
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: TextField(
+
+              controller: _textEditingController,
+              onChanged: (value) {
+                _tagsInputValue = value;
+                setState(() {
+                  _tagsInputValue.length > 0 ? _tagInputIsEmpty =false : _tagInputIsEmpty = true;
+
+                });
+
+              },
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(20),
+              ],
+              decoration: InputDecoration(
+                hintText: "Tags",
+                prefixIcon: Icon(
+                  Icons.outlined_flag,
+                  color: Theme.of(context).primaryColor,
+                ),
+                border: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                enabledBorder: InputBorder.none,
+              ),
+            ),
+          ),
+          Builder(builder: (BuildContext context) {
+            return Container(
+                width: 50,
+                alignment: Alignment.center,
+                child: IconButton(
+                  color: Theme.of(context).primaryColor,
+                  icon: Icon(Icons.add),
+                  onPressed: _tagInputIsEmpty ? null : (){
+                    // make sure there is input
+                    // check if tag already exists in tags list
+                    bool alreadyExists = false;
+                    for (Tag tag in tags) {
+                      if (_tagsInputValue == tag.title) {
+                        alreadyExists = true;
+                        snackBar.showSnackBar(context, "Tag already added.");
+                      }
+                    }
+                    if (!alreadyExists) {
+                      setState(() {
+                        tags.add(Tag(title: _tagsInputValue));
+                        _textEditingController.clear();
+                      });
+                    }
+                  },
+                ));
+          }),
+        ],
+      ),
+    );
+  }
+
+
+  Widget _buildRatingInput(context) {
+    return Container(
       alignment: Alignment.center,
       height: 100,
       width: 500,
@@ -159,14 +284,15 @@ class _NewEventPageState extends State<NewEventPage> {
       ),
 //      ),
     );
+  }
 
-    final _submitButton = RaisedButton(
+  Widget _buildSubmitButton(context) {
+    return RaisedButton(
       color: Theme.of(context).primaryColor,
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       onPressed: () async {
         await createNewEvent();
       },
-
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(5))),
       child: Container(
@@ -181,7 +307,10 @@ class _NewEventPageState extends State<NewEventPage> {
                 .copyWith(color: Theme.of(context).buttonColor),
           )),
     );
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: true,
       backgroundColor: Theme.of(context).canvasColor,
@@ -194,10 +323,12 @@ class _NewEventPageState extends State<NewEventPage> {
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 20),
           children: <Widget>[
-            _titleInput,
-            _notesInput,
-            ratingInput,
-            _submitButton
+            _buildTitleInput(context),
+            _buildNotesInput(context),
+            tags.length > 0 ? _buildTagsContainer(context) : Container(),
+            _buildTagsInput(context),
+            _buildRatingInput(context),
+            _buildSubmitButton(context)
           ],
         ),
       ),

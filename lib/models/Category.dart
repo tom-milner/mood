@@ -9,6 +9,7 @@ class Category {
   Category.fromMap(Map<String, dynamic> map)
       : assert(map["title"] != null),
         assert(map["color"] != null),
+        assert(map["categoryId"] != null),
         title = map["title"],
         id = map["categoryId"],
         color = map["color"];

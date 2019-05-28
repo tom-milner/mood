@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mood_app/blocs/EventBloc.dart';
-import 'package:mood_app/models/Event.dart';
+import 'package:mood_app/models/Event/Event.dart';
 import 'package:mood_app/pages/journal/EventCard.dart';
 import 'package:mood_app/pages/journal/NewEventPage/NewEventPage.dart';
 import "package:mood_app/widgets/MoodCard.dart";

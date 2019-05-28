@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:mood_app/models/Event.dart';
+import 'package:mood_app/models/Event/Event.dart';
 import 'package:mood_app/utils/Utils.dart';
 import 'package:mood_app/widgets/CustomImageDelegate.dart';
 import 'package:mood_app/widgets/MoodCard.dart';

@@ -3,7 +3,7 @@ import 'dart:math';
 import "package:flutter/material.dart";
 import "package:mood_app/models/Category.dart";
 import 'package:mood_app/pages/scenarios/ScenariosPage/ViewScenariosPage.dart';
-import 'package:mood_app/services/ScenarioService.dart';
+import 'package:mood_app/services/ScenarioService/ScenarioService.dart';
 import 'package:mood_app/utils/Utils.dart';
 import "package:mood_app/widgets/MoodCard.dart";
 

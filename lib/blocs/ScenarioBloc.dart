@@ -1,6 +1,6 @@
 import "dart:async";
 import 'package:mood_app/models/Category.dart';
-import "package:mood_app/services/ScenarioService.dart";
+import "package:mood_app/services/ScenarioService/ScenarioService.dart";
 import 'package:mood_app/models/Scenario.dart';
 
 class ScenarioBloc {

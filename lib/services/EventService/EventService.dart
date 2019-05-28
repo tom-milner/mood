@@ -1,4 +1,4 @@
-import "package:mood_app/models/Event.dart";
+import "package:mood_app/models/Event/Event.dart";
 import 'package:mood_app/services/database/DatabaseService.dart';
 import 'package:sqflite/sqflite.dart';
 

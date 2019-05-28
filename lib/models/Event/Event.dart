@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import "package:intl/intl.dart";
+import 'package:mood_app/models/Event/Tag.dart';
 import 'package:quill_delta/quill_delta.dart';
 
 class Event {
@@ -9,8 +10,9 @@ class Event {
   String notesDeltaString;
   int rating;
   int millisFromEpoch;
+  List<Tag> tags;
 
-  Event({this.title,this.rating, this.millisFromEpoch});
+  Event({this.title,this.rating, this.millisFromEpoch, this.tags});
 
   Event.fromMap(Map<String, dynamic> map)
       : assert(map["title"] != null),
@@ -38,6 +40,7 @@ class Event {
   Delta getDelta(){
     return Delta.fromJson(json.decode(notesDeltaString) as List);
   }
+
 
    setNotesDeltaString(Delta delta){
     notesDeltaString = json.encode(delta);

@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:mood_app/models/Scenario.dart";
 import 'package:mood_app/utils/Utils.dart';
-import "package:mood_app/services/ScenarioService.dart";
+import "package:mood_app/services/ScenarioService/ScenarioService.dart";
 import 'package:mood_app/widgets/CustomImageDelegate.dart';
 import 'package:mood_app/widgets/MoodSnackBar.dart';
 import 'package:quill_delta/quill_delta.dart';
