@@ -18,8 +18,6 @@ class NewEventPage extends StatefulWidget {
 }
 
 class _NewEventPageState extends State<NewEventPage> {
-
-
   final eventBloc = EventBloc();
 
   // create a new Document
@@ -28,8 +26,7 @@ class _NewEventPageState extends State<NewEventPage> {
 
   // for alerting users
   MoodSnackBar snackBar = new MoodSnackBar();
-  TextEditingController _textEditingController= new TextEditingController();
-
+  TextEditingController _textEditingController = new TextEditingController();
 
   String _tagsInputValue;
   bool _tagInputIsEmpty = true;
@@ -39,8 +36,7 @@ class _NewEventPageState extends State<NewEventPage> {
   String eventTitle;
   List<Tag> tags = <Tag>[];
 
-
-  void dispose(){
+  void dispose() {
     _textEditingController.dispose();
   }
 
@@ -152,20 +148,43 @@ class _NewEventPageState extends State<NewEventPage> {
   }
 
   Widget _buildTagBox(context, Tag tag) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(2),
-        color: Theme.of(context).primaryColor,
-      ),
-      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2.5),
-      margin: EdgeInsets.only(right: 5),
-      alignment: Alignment.center,
-      child: Text(
-        tag.title,
-        style: Theme.of(context)
-            .textTheme
-            .body1
-            .copyWith(color: Theme.of(context).buttonColor),
+    return GestureDetector(
+      onTap: (){
+        setState(() {
+          tags.remove(tag);
+        });
+      },
+
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(2),
+          color: Theme.of(context).primaryColor,
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2.5),
+        margin: EdgeInsets.only(right: 5),
+        alignment: Alignment.center,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              tag.title,
+              textAlign: TextAlign.center,
+              style: Theme.of(context)
+                  .textTheme
+                  .body1
+                  .copyWith(color: Theme.of(context).buttonColor),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Icon(
+              Icons.clear,
+              size: 15,
+              color: Theme.of(context).buttonColor,
+            )
+          ],
+        ),
       ),
     );
   }
@@ -189,22 +208,19 @@ class _NewEventPageState extends State<NewEventPage> {
   }
 
   Widget _buildTagsInput(context) {
-
-
     return MoodCard(
       child: Row(
         children: <Widget>[
           Expanded(
             child: TextField(
-
               controller: _textEditingController,
               onChanged: (value) {
                 _tagsInputValue = value;
                 setState(() {
-                  _tagsInputValue.length > 0 ? _tagInputIsEmpty =false : _tagInputIsEmpty = true;
-
+                  _tagsInputValue.length > 0
+                      ? _tagInputIsEmpty = false
+                      : _tagInputIsEmpty = true;
                 });
-
               },
               inputFormatters: [
                 LengthLimitingTextInputFormatter(20),
@@ -228,30 +244,32 @@ class _NewEventPageState extends State<NewEventPage> {
                 child: IconButton(
                   color: Theme.of(context).primaryColor,
                   icon: Icon(Icons.add),
-                  onPressed: _tagInputIsEmpty ? null : (){
-                    // make sure there is input
-                    // check if tag already exists in tags list
-                    bool alreadyExists = false;
-                    for (Tag tag in tags) {
-                      if (_tagsInputValue == tag.title) {
-                        alreadyExists = true;
-                        snackBar.showSnackBar(context, "Tag already added.");
-                      }
-                    }
-                    if (!alreadyExists) {
-                      setState(() {
-                        tags.add(Tag(title: _tagsInputValue));
-                        _textEditingController.clear();
-                      });
-                    }
-                  },
+                  onPressed: _tagInputIsEmpty
+                      ? null
+                      : () {
+                          // make sure there is input
+                          // check if tag already exists in tags list
+                          bool alreadyExists = false;
+                          for (Tag tag in tags) {
+                            if (_tagsInputValue == tag.title) {
+                              alreadyExists = true;
+                              snackBar.showSnackBar(
+                                  context, "Tag already added.");
+                            }
+                          }
+                          if (!alreadyExists) {
+                            setState(() {
+                              tags.add(Tag(title: _tagsInputValue));
+                              _textEditingController.clear();
+                            });
+                          }
+                        },
                 ));
           }),
         ],
       ),
     );
   }
-
 
   Widget _buildRatingInput(context) {
     return Container(
