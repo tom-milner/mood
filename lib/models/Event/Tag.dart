@@ -5,19 +5,19 @@ class Tag {
   Tag({this.id, this.title});
 
   Tag.fromMap(Map<String, dynamic> map)
-      : assert(map["tagId"]),
-        assert(map["title"]),
-        id = map["tagId"],
-        title = map["title"];
+      : assert(map["title"] != null),
+        assert(map["tagId"] != null),
+        title = map["title"],
+        id = map["tagId"];
 
-  Map<String, dynamic> toMap(){
-    var map = <String, dynamic>{
-      "title" : title
-    };
-    if(id!=null){
+  Map<String, dynamic> toMap() {
+    var map = <String, dynamic>{"title": title};
+    if (id != null) {
       map["tagId"] = id;
     }
     return map;
   }
 
+  @override
+  String toString() => "Tag<$id,$title>";
 }

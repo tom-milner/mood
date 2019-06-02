@@ -37,6 +37,7 @@ class _NewEventPageState extends State<NewEventPage> {
   List<Tag> tags = <Tag>[];
 
   void dispose() {
+    super.dispose();
     _textEditingController.dispose();
   }
 
@@ -45,10 +46,10 @@ class _NewEventPageState extends State<NewEventPage> {
       int eventTime = DateTime.now().millisecondsSinceEpoch;
       int eventRating = sliderValue.floor();
       Event newEvent = Event(
-        title: eventTitle,
-        rating: eventRating,
-        millisFromEpoch: eventTime,
-      );
+          title: eventTitle,
+          rating: eventRating,
+          millisFromEpoch: eventTime,
+          tags: tags);
       newEvent.setNotesDeltaString(_controller.document.toDelta());
       await eventBloc.createNewEvent(newEvent);
 
@@ -149,12 +150,11 @@ class _NewEventPageState extends State<NewEventPage> {
 
   Widget _buildTagBox(context, Tag tag) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         setState(() {
           tags.remove(tag);
         });
       },
-
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(2),
@@ -260,6 +260,7 @@ class _NewEventPageState extends State<NewEventPage> {
                           if (!alreadyExists) {
                             setState(() {
                               tags.add(Tag(title: _tagsInputValue));
+                              _tagInputIsEmpty = true;
                               _textEditingController.clear();
                             });
                           }

@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:mood_app/models/Event/Event.dart';
 import 'package:mood_app/pages/journal/ViewEventPage/ViewEventPage.dart';
+import 'package:mood_app/services/EventService/EventService.dart';
 import "package:mood_app/ui/theme.dart";
 import 'package:mood_app/utils/Utils.dart';
 import 'package:mood_app/widgets/MoodCard.dart';
@@ -11,7 +12,11 @@ class EventCard extends StatelessWidget {
   IconData tileIcon;
   EventCard(this.event);
 
+
+  EventService _eventService = EventService();
+
   _makeEventCard(BuildContext context, Event event) {
+
     switch (event.rating) {
       case 1:
         tileColor = MoodTheme.eventCardColors["red"];

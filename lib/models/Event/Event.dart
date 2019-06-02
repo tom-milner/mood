@@ -12,37 +12,38 @@ class Event {
   int millisFromEpoch;
   List<Tag> tags;
 
-  Event({this.title,this.rating, this.millisFromEpoch, this.tags});
+  Event({this.title, this.rating, this.millisFromEpoch, this.tags});
 
   Event.fromMap(Map<String, dynamic> map)
       : assert(map["title"] != null),
+        assert(map["eventId"] != null),
         assert(map["notesDeltaString"] != null),
         assert(map["rating"] != null),
         assert(map["millisFromEpoch"] != null),
         title = map["title"],
+        id = map["eventId"],
         notesDeltaString = map["notesDeltaString"],
         rating = map["rating"],
         millisFromEpoch = map["millisFromEpoch"];
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
-      "title":title,
-      "notesDeltaString":notesDeltaString,
-      "rating":rating,
-      "millisFromEpoch":millisFromEpoch
+      "title": title,
+      "notesDeltaString": notesDeltaString,
+      "rating": rating,
+      "millisFromEpoch": millisFromEpoch
     };
-    if(id != null){
+    if (id != null) {
       map["id"] = id;
     }
     return map;
   }
 
-  Delta getDelta(){
+  Delta getDelta() {
     return Delta.fromJson(json.decode(notesDeltaString) as List);
   }
 
-
-   setNotesDeltaString(Delta delta){
+  setNotesDeltaString(Delta delta) {
     notesDeltaString = json.encode(delta);
   }
 
@@ -56,4 +57,7 @@ class Event {
     String formattedTime = DateFormat.yMMMd("en_GB").format(dateTime);
     return formattedTime;
   }
+
+  @override
+  toString() => "Event<$id,$title,$tags";
 }

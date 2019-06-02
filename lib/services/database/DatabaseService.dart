@@ -31,7 +31,6 @@ class DatabaseService {
       return await openDatabase(path,
           version: 1, onOpen: (db) {}, onCreate: _onCreate);
     } catch (e) {
-      print("Error opening database");
       print(e.toString());
     }
   }
@@ -40,6 +39,8 @@ class DatabaseService {
     await db.execute(DatabaseTableCreator.category);
     await db.execute(DatabaseTableCreator.scenario);
     await db.execute(DatabaseTableCreator.event);
+    await db.execute(DatabaseTableCreator.tag);
+    await db.execute(DatabaseTableCreator.eventTag);
     await DatabaseSeeder.seedDb(db);
   }
 

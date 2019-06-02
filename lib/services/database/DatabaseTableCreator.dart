@@ -46,7 +46,8 @@ class DatabaseTableCreator {
 
   static const String tag = (
     "CREATE TABLE Tag ("
-      "primary key tagId INTEGER NOT NULL,"
+      "tagId INTEGER PRIMARY KEY NOT NULL,"
       "title TEXT NOT NULL"
+      ")"
   );
 }

@@ -19,7 +19,6 @@ class _CategoriesListState extends State<CategoriesList> {
     return StreamBuilder(
         stream: _categoryBloc.categories,
         builder: (BuildContext context, AsyncSnapshot categorySnapshot) {
-          print("building");
           if (!categorySnapshot.hasData) {
             return Container(
               alignment: Alignment.center,

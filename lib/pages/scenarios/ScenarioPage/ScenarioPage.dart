@@ -139,7 +139,6 @@ class _ScenarioPageState extends State<ScenarioPage> {
   }
 
   Widget _buildContentWidget(BuildContext context, Scenario scenario) {
-    print(scenario.getContentDelta());
     try {
       Delta contentDelta = scenario.getContentDelta();
 

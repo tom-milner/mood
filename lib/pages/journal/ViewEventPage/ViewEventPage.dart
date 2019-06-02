@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:mood_app/models/Event/Event.dart';
+import 'package:mood_app/services/EventService/TagService.dart';
 import 'package:mood_app/utils/Utils.dart';
 import 'package:mood_app/widgets/CustomImageDelegate.dart';
 import 'package:mood_app/widgets/MoodCard.dart';
@@ -8,6 +9,9 @@ import 'package:quill_delta/quill_delta.dart';
 import "package:zefyr/zefyr.dart";
 
 class ViewEventPage extends StatelessWidget {
+
+  TagService _tagService = TagService();
+
   Event event;
   Color eventColor;
   IconData eventIcon;
@@ -17,7 +21,6 @@ class ViewEventPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
 
   Delta notesDelta = event.getDelta();
 
@@ -32,7 +35,7 @@ class ViewEventPage extends StatelessWidget {
           ),
         ),
         body: ListView(
-
+          shrinkWrap: true,
           padding: EdgeInsets.all(10),
           children: <Widget>[
             Container(
@@ -45,21 +48,6 @@ class ViewEventPage extends StatelessWidget {
                     .copyWith(fontStyle: FontStyle.italic, fontSize: 40),
               ),
             ),
-
-            // RATING
-
-//     ListView(
-//                padding: EdgeInsets.all(10),
-//                shrinkWrap: true,
-//                children: <Widget>[
-//                  Text(
-//                    "Your Rating:",
-//                    textAlign: TextAlign.left,
-//                    style: Theme.of(context)
-//                        .textTheme
-//                        .title
-//                        .copyWith(color: Theme.of(context).primaryColor,),
-//                  ),
             Container(
               margin: EdgeInsets.symmetric(vertical: 30),
               width: 150,
@@ -97,12 +85,36 @@ class ViewEventPage extends StatelessWidget {
                   ZefyrView(
                     document: NotusDocument.fromDelta(notesDelta),
                     imageDelegate: CustomImageDelegate(),
-                  )
+                  ),
+
                 ],
               ),
             ),
+            _buildTagsContainer(event)
+
           ],
         ));
+  }
+
+
+  FutureBuilder _buildTagsContainer(Event event)  {
+     return FutureBuilder(
+       future: _tagService.getTagsFromEvent(event),
+       builder: (BuildContext context, AsyncSnapshot snapshot){
+         if(!snapshot.hasData){
+           return Container();
+         }
+         return MoodCard(
+           child: ListView.builder(
+             shrinkWrap: true,
+             itemCount: snapshot.data.length,
+             itemBuilder: (BuildContext context, int index){
+               return Text(snapshot.data[index].title);
+             },
+           ),
+         );
+       },
+     );
   }
 }
 
