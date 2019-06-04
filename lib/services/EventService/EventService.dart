@@ -16,7 +16,6 @@ class EventService {
     var res = await db.query(tableName);
     if (res.isNotEmpty) {
       var events =  res.map((event) => Event.fromMap(event)).toList();
-    print(events);
 
       for(int i = 0; i < events.length; i++){
         events[i].tags = await _tagService.getTagsFromEvent(events[i]);
@@ -61,7 +60,6 @@ class EventService {
   // create links between event and tags
   createEventTags(Event newEvent) async {
     final Database db = await dbService.database;
-    print(newEvent);
 
     // create entries in EventTag linking events with tags
     for (Tag tag in newEvent.tags) {
@@ -71,8 +69,7 @@ class EventService {
         "tagId": tag.id
       };
 
-      print(eventTag);
-      
+
       await db.insert("EventTag", eventTag);
     }
   }

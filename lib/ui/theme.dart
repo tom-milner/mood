@@ -8,21 +8,23 @@ class MoodTheme {
   static final Map<String, Color> eventCardColors = {
     "red": Colors.red[500],
     "purple": Colors.purple[300],
-    "blue" : Colors.blue,
+    "blue": Colors.blue,
     "yellow": Colors.yellow,
     "green": Colors.green
   };
 
-//  static final Map<String, Color> categoryCardColors = {
-//    ""
-//  };
-
-
+  static ZefyrThemeData buildZefyrTheme(context) {
+    return ZefyrThemeData(
+      toolbarTheme: ZefyrToolbarTheme.fallback(context).copyWith(
+        color: Utils.lightenColor(Theme.of(context).primaryColor),
+        toggleColor: Utils.darkenColor(Theme.of(context).primaryColor),
+      ),
+      cursorColor: Theme.of(context).primaryColor,
+    );
+  }
 
   static final ThemeData LightMoodThemeData = ThemeData(
-
     fontFamily: "Raleway ",
-
 
     // default brightness and colours
     buttonColor: Color.fromRGBO(245, 245, 245, 1),
@@ -44,7 +46,6 @@ class MoodTheme {
 
     // Text themes
     textTheme: TextTheme(
-
       headline: TextStyle(
           fontSize: 35,
           color: Color.fromRGBO(84, 152, 245, 1.0),

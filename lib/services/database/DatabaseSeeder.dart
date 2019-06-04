@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:math';
 
 import 'package:mood_app/models/Category.dart';
@@ -15,7 +14,7 @@ class DatabaseSeeder {
     Category(title: "School", color: "Green"),
     Category(title: "Friends", color: "Green"),
     Category(title: "Relationships", color: "Green"),
-    Category(title: "Work", color: "Green"),
+    Category(title: "Anger", color: "Green"),
     Category(title: "Stress", color: "Green"),
   ];
 
@@ -28,20 +27,20 @@ class DatabaseSeeder {
         title: "Struggling With Exams?",
         description: "Here are some tips to get you through exams!."),
     Scenario(
-        title: "Feeliong yeety",
+        title: "Reduce your Anger",
+        description: "Tips to control your anger."),
+    Scenario(
+        title: "5 minute breathing",
+        description: "Techniques for managing stress"),
+    Scenario(
+        title: "Handling homework",
+        description: "Manage your time efficiently."),
+    Scenario(
+        title: "Struggling With Exams ----------------",
         description: "Here are some tips to get you through exams!."),
     Scenario(
-        title: "Whoop diddly do",
-        description: "Here are some tips to get you through exams!."),
-    Scenario(
-        title: "Life feeling shite?",
-        description: "Here are some tips to get you through exams!."),
-    Scenario(
-        title: "Struggling With Exams huh uh uh uh ?",
-        description: "Here are some tips to get you through exams!."),
-    Scenario(
-        title: "Struggling With Exams huh uh uh uh ?",
-        description: "Here are some tips to get you through exams!."),
+        title: "Reduce your Anger",
+        description: "Tips to control your anger."),
   ];
 
   static seedDb(Database db) async {

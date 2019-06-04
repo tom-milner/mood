@@ -1,15 +1,16 @@
 import "package:flutter/material.dart";
+import 'package:flutter/rendering.dart';
 import 'package:mood_app/models/Event/Event.dart';
+import 'package:mood_app/models/Event/Tag.dart';
 import 'package:mood_app/services/EventService/TagService.dart';
 import 'package:mood_app/utils/Utils.dart';
 import 'package:mood_app/widgets/CustomImageDelegate.dart';
 import 'package:mood_app/widgets/MoodCard.dart';
-import 'package:mood_app/widgets/PageTitle.dart';
+import 'package:mood_app/widgets/MoodTagBox.dart';
 import 'package:quill_delta/quill_delta.dart';
 import "package:zefyr/zefyr.dart";
 
 class ViewEventPage extends StatelessWidget {
-
   TagService _tagService = TagService();
 
   Event event;
@@ -18,11 +19,9 @@ class ViewEventPage extends StatelessWidget {
 
   ViewEventPage(this.event, this.eventColor, this.eventIcon);
 
-
   @override
   Widget build(BuildContext context) {
-
-  Delta notesDelta = event.getDelta();
+    Delta notesDelta = event.getDelta();
 
     return Scaffold(
         backgroundColor: Theme.of(context).canvasColor,
@@ -86,35 +85,54 @@ class ViewEventPage extends StatelessWidget {
                     document: NotusDocument.fromDelta(notesDelta),
                     imageDelegate: CustomImageDelegate(),
                   ),
-
                 ],
               ),
             ),
             _buildTagsContainer(event)
-
           ],
         ));
   }
 
+  FutureBuilder _buildTagsContainer(Event event) {
+    return FutureBuilder(
+      future: _tagService.getTagsFromEvent(event),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (!snapshot.hasData) {
+          return Container();
+        }
+        return Container(
+          height: 50,
+          padding: EdgeInsets.all(10),
+          child: ListView.builder(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            itemCount: snapshot.data.length,
+            itemBuilder: (BuildContext context, int index) {
+              return _buildTagBox(context, event.tags[index]);
+            },
+          ),
+        );
+      },
+    );
+  }
 
-  FutureBuilder _buildTagsContainer(Event event)  {
-     return FutureBuilder(
-       future: _tagService.getTagsFromEvent(event),
-       builder: (BuildContext context, AsyncSnapshot snapshot){
-         if(!snapshot.hasData){
-           return Container();
-         }
-         return MoodCard(
-           child: ListView.builder(
-             shrinkWrap: true,
-             itemCount: snapshot.data.length,
-             itemBuilder: (BuildContext context, int index){
-               return Text(snapshot.data[index].title);
-             },
-           ),
-         );
-       },
-     );
+  Widget _buildTagBox(BuildContext context, Tag tag) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(2),
+        color: Theme.of(context).primaryColor,
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2.5),
+      margin: EdgeInsets.only(right: 5),
+      alignment: Alignment.center,
+      child: Text(
+        tag.title,
+        textAlign: TextAlign.center,
+        style: Theme.of(context)
+            .textTheme
+            .body1
+            .copyWith(color: Theme.of(context).buttonColor),
+      ),
+    );
   }
 }
-

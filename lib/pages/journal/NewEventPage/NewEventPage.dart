@@ -4,7 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 import 'package:mood_app/models/Event/Tag.dart';
 import 'package:mood_app/pages/journal/NewEventPage/ZefyrEditorPage.dart';
-import 'package:mood_app/utils/Utils.dart';
+import 'package:mood_app/ui/theme.dart';
 import 'package:mood_app/widgets/CustomImageDelegate.dart';
 import 'package:mood_app/widgets/MoodCard.dart';
 import "package:flutter_fluid_slider/flutter_fluid_slider.dart";
@@ -90,18 +90,10 @@ class _NewEventPageState extends State<NewEventPage> {
     );
   }
 
-  ZefyrThemeData _buildZefyrTheme(context) {
-    return ZefyrThemeData(
-      toolbarTheme: ZefyrToolbarTheme.fallback(context).copyWith(
-        color: Utils.lightenColor(Theme.of(context).primaryColor),
-        toggleColor: Utils.darkenColor(Theme.of(context).primaryColor),
-      ),
-      cursorColor: Theme.of(context).primaryColor,
-    );
-  }
+
 
   Widget _buildNotesInput(context) {
-    var _zefyrTheme = _buildZefyrTheme(context);
+    var _zefyrTheme = MoodTheme.buildZefyrTheme(context);
 
     return MoodCard(
       child: Container(

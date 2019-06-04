@@ -45,7 +45,6 @@ class EventBloc {
     // create event
     newEvent = await _eventService.createNewEvent(newEvent);
 
-    print("newEvent: $newEvent");
     // create EventTag linking the tags to events
     await _eventService.createEventTags(newEvent);
 

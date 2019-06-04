@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:mood_app/models/Scenario.dart";
+import 'package:mood_app/ui/theme.dart';
 import 'package:mood_app/utils/Utils.dart';
 import "package:mood_app/services/ScenarioService/ScenarioService.dart";
 import 'package:mood_app/widgets/CustomImageDelegate.dart';
@@ -19,7 +20,6 @@ class _ScenarioPageState extends State<ScenarioPage> {
   bool isFavourite;
   bool hasLongTitle = false;
   TextSpan titleSpan = TextSpan();
-
   @override
   void initState() {
     isFavourite = widget.scenario.isFavourite;
@@ -144,9 +144,12 @@ class _ScenarioPageState extends State<ScenarioPage> {
 
       return new Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
-        child: ZefyrView(
-          document: NotusDocument.fromDelta(contentDelta),
-          imageDelegate: CustomImageDelegate(),
+        child: ZefyrTheme(
+          data: MoodTheme.buildZefyrTheme(context),
+          child: ZefyrView(
+            document: NotusDocument.fromDelta(contentDelta),
+            imageDelegate: CustomImageDelegate(),
+          ),
         ),
       );
     } catch (e) {

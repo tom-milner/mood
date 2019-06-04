@@ -53,7 +53,6 @@ class TagService {
         tags.add(tag);
       }
     }
-    print(tags);
     return tags;
   }
 
