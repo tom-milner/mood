@@ -4,6 +4,14 @@ import "package:mood_app/pages/main/main.dart";
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
+
+// #########################################
+// TODO: EXTENSION IDEAS
+// - push notifications - daily tip!!!!
+// - childline button on dash
+// #########################################
+
+
 // set local to en_UK
 void main() =>
     initializeDateFormatting("en_GB", null).then((_) => runApp(MyApp()));

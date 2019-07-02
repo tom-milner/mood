@@ -10,6 +10,7 @@ import 'package:mood_app/widgets/MoodTagBox.dart';
 import 'package:quill_delta/quill_delta.dart';
 import "package:zefyr/zefyr.dart";
 
+
 class ViewEventPage extends StatelessWidget {
   TagService _tagService = TagService();
 
